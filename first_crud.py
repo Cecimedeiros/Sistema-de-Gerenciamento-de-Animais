@@ -122,10 +122,14 @@ def main ():
         print ("Bia e Isa vai fazer ainda")
     elif op==4:  
         print ("Saindo da plataforma. Até logo!")
+        fim ()
     else: 
         print ("Opção inválida, tente novamente! ")
         main()
-
+def fim ():
+    print ("Saindo da plataforma...")
+    
 if __name__=="__main__":
     main ()
 main ()
+fim ()
