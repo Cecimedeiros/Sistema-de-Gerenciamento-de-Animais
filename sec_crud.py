@@ -3,7 +3,7 @@ import os
 from time import sleep
 
 caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'json2.json')
-caminho_arquivocrud_animais = os.path.join(os.path.dirname(__file__), 'animais.json')
+
 
 def carregar_voluntario():
     if not os.path.exists(caminho_arquivocrud2):
@@ -18,7 +18,6 @@ def cadastrar_voluntario(nome, cpf, endereco, horas):
     with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("O voluntário foi cadastrado!")
-    print(f"Estado atual dos voluntários: {voluntarios}")
 
 def listar_voluntario():
     voluntarios = carregar_voluntario()
@@ -68,18 +67,25 @@ def buscar_voluntario(nome):
     if not encontrado:
         print("Nenhum voluntário encontrado!")
 
+
+caminho_arquivocrud_animais = os.path.join(os.path.dirname(__file__), 'animais.json')
+
 def carregar_animais():
     if not os.path.exists(caminho_arquivocrud_animais):
+
         with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
             json.dump([], arquivojson_animais, indent=3)
+
     with open(caminho_arquivocrud_animais, 'r') as arquivojson_animais:
         return json.load(arquivojson_animais)
 
 def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico):
     animais = carregar_animais()
+
     animais.append({'nome': nome, 'especie': especie, 'idade': idade, 'porte': porte, 'raca': raca, 'historico_medico': historico_medico})
     with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
-        json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
+        json.dump(animais, arquivojson_animais, indent=4, ensure_ascii=False)
+
     print("O animal foi cadastrado!")
 
 def listar_animais():
@@ -190,13 +196,13 @@ def main2():
                 match opcao:
                     case "1":
                         while True:
-                            print("\n->>> CADASTRAMENTO DE ANIMAIS <<<-")
+                            print("\n->>> CADASTRAMENTO DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\nInforme o nome do animal a ser cadastrado: ")
                             especie = input("\nInforme a espécie do animal: ")
                             idade = input("\nInforme a idade do animal (em anos): ")
                             porte = input("\nInforme o porte do animal (pequeno, médio e grande): ")
                             raca = input("\nInforme a raça do animal: ")
-                            historico_medico = input("\n Fale sobre o animal: É vermifugado? Possui as vacinas em dia? Realizou tratamento ou cirurgia recente? Acresce o que considerar importante): ")
+                            historico_medico = input("\n Fale sobre o animal: É vermifugado? Possui as vacinas em dia? Realizou tratamento ou cirurgia recente? Acresce o que considerar): ")
                             cadastrar_animal(nome, especie, idade, porte, raca, historico_medico)
                             maisum = input("Deseja cadastrar mais um animal? (s/n): ")
                             if maisum.lower() == 'n':
