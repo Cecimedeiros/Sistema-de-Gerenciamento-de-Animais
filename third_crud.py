@@ -33,7 +33,7 @@ def listar_adotantes():
             cidade = adotante.get('cidade', 'Cidade não disponível')
             contato = adotante.get('contato', 'Contato não disponível')
             preferencia_animal = adotante.get('preferencia_animal', 'Preferência não disponível')
-            print(f"Nome: {nome}, Idade: {idade}, Cidade: {cidade}, Contato: {contato}, Preferência de animal: {preferencia_animal}")
+            print(f"\n Nome: {nome}, \n Idade: {idade}, \n Cidade: {cidade}, \n Contato: {contato}, \n Preferência de animal: {preferencia_animal}")
     else:
         print("Nenhum adotante cadastrado!")
 
@@ -59,7 +59,6 @@ def excluir_adotante(nome):
     else:
         print("Adotante não encontrado para exclusão.")
 
-# Função principal para gerenciar o sistema
 def main():
     print("<<---- PLATAFORMA DE ADOÇÃO ---->>")
     print("Bem-vindo à plataforma de gerenciamento de adotantes!")
@@ -72,7 +71,6 @@ def main():
                 nome = input("Informe o nome do adotante: ")
                 idade = input("Informe a idade do adotante: ")
                 
-                # Escolha de cidade
                 print("\nCidades disponíveis em Recife:")
                 cidades = ["Boa Viagem", "Casa Forte", "Graças", "Jaqueira", "Torre", "Várzea"]
                 for i, cidade in enumerate(cidades, 1):
@@ -82,7 +80,6 @@ def main():
                 
                 contato = input("Informe o contato do adotante: ")
 
-                # Escolha de preferência de animal
                 print("\nPreferências de animais:")
                 preferencias = ["Cachorro", "Gato", "Pássaro", "Outros"]
                 for i, preferencia in enumerate(preferencias, 1):
