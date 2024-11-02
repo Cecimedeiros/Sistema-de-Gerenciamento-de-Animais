@@ -16,23 +16,5 @@
       "endereco": "pina",
       "porte_animal": "pequeno",
       "contato": "819"
-   },
-   {
-      "nome": "a",
-      "endereco": "a",
-      "porte_animal": "b",
-      "contato": "2"
-   },
-   {
-      "nome": "f",
-      "endereco": "",
-      "porte_animal": "d",
-      "contato": "f"
-   },
-   {
-      "nome": "dd",
-      "endereco": "d",
-      "porte_animal": "",
-      "contato": "d"
    }
 ]
