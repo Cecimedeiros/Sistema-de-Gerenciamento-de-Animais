@@ -150,10 +150,10 @@ def main2():
                     case "1":
                         while True:
                             print("\n->>> CADASTRAMENTO DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
-                            nome = input("\nInforme o nome do voluntário a ser cadastrado: ")
+                            nome = input("\nInforme o nome completo do voluntário a ser cadastrado: ")
                             cpf = input("\nInforme o CPF do voluntário: ")
-                            endereco = input("\nInforme seu endereço: ")
-                            horas = input("\nQuantas horas semanais pode dedicar no voluntariado? ")
+                            endereco = input("\nInforme seu bairro: ")
+                            horas = input("\nQuantas horas semanais pode dedicar no voluntariado? Digitar apenas em números.")
                             cadastrar_voluntario(nome, cpf, endereco, horas)
                             maisum = input("Deseja cadastrar mais um voluntário? (s/n): ")
                             if maisum.lower() == 'n':
@@ -167,18 +167,18 @@ def main2():
                                 break
                     case "3":
                         while True:
-                            nome_antigo = input("Informe o nome a ser atualizado (o nome antigo): ")
-                            novo_nome = input("Informe o novo nome: ")
-                            novo_ende = input("Informe o novo endereço do voluntário: ")
+                            nome_antigo = input("Informe o nome completo a ser atualizado (o nome antigo): ")
+                            novo_nome = input("Informe o novo nome completo: ")
+                            novo_ende = input("Informe o novo bairro do voluntário: ")
                             novo_contato = input("Informe o novo contato do voluntário: ")
-                            novo_horario = input("Informe o novo horário disponível: ")
+                            novo_horario = input("Informe o novo horário disponível. Digitar apenas números: ")
                             atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario)
                             maisum = input("Deseja atualizar mais um voluntário? (s/n): ")
                             if maisum.lower() == 'n':
                                 break
                     case "4":
                         while True:
-                            nome = input("Qual o nome do voluntário que você deseja excluir? ")
+                            nome = input("Qual o nome completo do voluntário que você deseja excluir? ")
                             excluir_voluntario(nome)
                             maisum = input("Deseja excluir mais um voluntário? (s/n): ")
                             if maisum.lower() == 'n':
@@ -221,7 +221,9 @@ def main2():
                             novo_nome = input("Informe o novo nome: ")
                             nova_especie = input("Informe a nova espécie do animal: ")
                             nova_idade = input("Informe a nova idade do animal: ")
-                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade)
+                            novo_dono = input("Informe o novo dono do animal: ")
+                            historico_medico = input("Informe o novo histórico médido do animal: ")
+                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono)
                             maisum = input("Deseja atualizar mais um animal? (s/n): ")
                             if maisum.lower() == 'n':
                                 break
@@ -238,7 +240,7 @@ def main2():
                         print("Voltando ao menu inicial...")
                         break
                     case _:
-                        print("Opção inválida! Tente novamente.")   
+                        print("Opção inválida! Tente novamente!")   
 
 if __name__ == "__main__":
     main2()
