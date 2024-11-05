@@ -12,36 +12,21 @@ def carregar_voluntario():
     with open(caminho_arquivocrud2, 'r') as arquivojson2_aberto:
         return json.load(arquivojson2_aberto)
 
-def cadastrar_voluntario(nome, cpf, endereco, horas):
+def cadastrar_voluntario(nome, cpf, endereco, contato, horas):
     voluntarios = carregar_voluntario()
-    voluntarios.append({'nome': nome, 'cpf': cpf, 'horas': horas, 'endereço': endereco})
+    
+    voluntarios.append({'nome': nome, 'cpf': cpf, 'endereço': endereco, 'contato': contato, 'horas': horas})
     with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("O voluntário foi cadastrado!")
 
 def listar_voluntario():
     voluntarios = carregar_voluntario()
-    if not voluntarios: 
+    if not voluntarios:
         print("Nenhum voluntário cadastrado!")
         return
     for voluntario in voluntarios:
-        print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n Horas: {voluntario['horas']}, CPF: {voluntario['cpf']} ")
-
-def atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario):
-    voluntarios = carregar_voluntario()
-    for voluntario in voluntarios:
-        if voluntario['nome'] == nome_antigo:
-            voluntario['nome'] = novo_nome
-            voluntario['endereço'] = novo_ende
-            voluntario['contato'] = novo_contato
-            voluntario['horas'] = novo_horario
-            break
-    else:
-        print("Voluntário não encontrado!")
-        return
-    with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto: 
-        json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
-    print("Informações sobre o voluntário atualizadas!")
+        print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n Contato: {voluntario.get('contato')},\n Horas: {voluntario['horas']}, CPF: {voluntario['cpf']} ")
 
 def excluir_voluntario(nome):
     voluntarios = carregar_voluntario()
@@ -61,14 +46,29 @@ def buscar_voluntario(nome):
     encontrado = False
     for voluntario in voluntarios:
         if voluntario['nome'] == nome:
-            print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n CPF: {voluntario['cpf']}, Contato: {voluntario.get('contato', 'Não informado')} ")
+            print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n CPF: {voluntario['cpf']}, \n Contato: {voluntario.get('contato')} \n Horas: {voluntario['horas']}")
             encontrado = True
             break
     if not encontrado:
         print("Nenhum voluntário encontrado!")
-
-
-
+        
+def atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario):
+    voluntarios = carregar_voluntario()
+    for voluntario in voluntarios:
+        if voluntario['nome'] == nome_antigo:
+            voluntario['nome'] = novo_nome
+            voluntario['endereço'] = novo_ende
+            voluntario['contato'] = novo_contato
+            voluntario['horas'] = novo_horario
+            break
+    else:
+        print("Voluntário não encontrado!")
+        return
+    with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto: 
+        json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
+    print("Informações sobre o voluntário atualizadas!")
+    
+    
 caminho_arquivocrud_animais = os.path.join(os.path.dirname(__file__), 'animais.json')
 
 def carregar_animais():
@@ -81,14 +81,31 @@ def carregar_animais():
         return json.load(arquivojson_animais)
 
 def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico):
-    animais = carregar_animais()
+    adotado = ''
+    while adotado not in ['s', 'n']:
+        adotado = input("O animal é adotado? (s/n): ").lower()
+        if adotado == 's':
+            nome_dono = input("Informe o nome completo do dono: ")
+        elif adotado == 'n':
+            nome_dono = None
+        else:
+            print("Opção inválida! Digite 's' ou 'n'.")
 
-    animais.append({'nome': nome, 'especie': especie, 'idade': idade, 'porte': porte, 'raca': raca, 'historico_medico': historico_medico})
+    animais = carregar_animais()
+    animais.append({
+        'nome': nome,
+        'especie': especie,
+        'idade': idade,
+        'porte': porte,
+        'raca': raca,
+        'historico_medico': historico_medico,
+        'dono': nome_dono
+    })
     with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=4, ensure_ascii=False)
 
     print("O animal foi cadastrado!")
-
+    
 def listar_animais():
     animais = carregar_animais()
     if not animais:
@@ -97,7 +114,7 @@ def listar_animais():
     for animal in animais:
         print(f"Nome: {animal['nome']}, \n Espécie: {animal['especie']}, \n Idade: {animal['idade']}, \n Porte: {animal['porte']}, \n Raça: {animal['raca']}, \n Histórico Médico: {animal['historico_medico']}")
 
-def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono):
+def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico):
     animais = carregar_animais()
     for animal in animais:
         if animal['nome'] == nome_antigo:
@@ -105,13 +122,14 @@ def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono
             animal['especie'] = nova_especie
             animal['idade'] = nova_idade
             animal['dono'] = novo_dono
+            animal['historico_medico'] = historico_medico  
             break
-    else:
-        print("Animal não encontrado!")
-        return
+
     with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
     print("Informações sobre o animal atualizadas!")
+
+
 
 def excluir_animal(nome):
     animais = carregar_animais()
@@ -131,11 +149,14 @@ def buscar_animal(nome):
     encontrado = False
     for animal in animais:
         if animal['nome'] == nome:
-            print(f"Nome: {animal['nome']}, \n Espécie: {animal['especie']}, \n Idade: {animal['idade']}, \n Porte: {animal['porte']}, \n Raça: {animal['raca']}, \n Histórico Médico: {animal['historico_medico']}")
+            adotado = "Sim" if animal.get('dono') else "Não"
+            dono = animal.get('dono', 'N/A')  # Se não tiver dono, mostra 'N/A'
+            print(f"Nome: {animal['nome']}, \nEspécie: {animal['especie']}, \nIdade: {animal['idade']}, \nPorte: {animal['porte']}, \nRaça: {animal['raca']}, \nHistórico Médico: {animal['historico_medico']}, \nAdotado: {adotado}, \nNome do Dono: {dono}")
             encontrado = True
             break
     if not encontrado:
         print("Nenhum animal encontrado!")
+
 
 def main2():
     while True:
@@ -151,13 +172,33 @@ def main2():
                         while True:
                             print("\n->>> CADASTRAMENTO DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\nInforme o nome completo do voluntário a ser cadastrado: ")
-                            cpf = input("\nInforme o CPF do voluntário: ")
-                            endereco = input("\nInforme seu bairro: ")
-                            horas = input("\nQuantas horas semanais pode dedicar no voluntariado? Digitar apenas em números.")
-                            cadastrar_voluntario(nome, cpf, endereco, horas)
+                            while True:
+                                try:
+                                    cpf = int(input("n\Informe o CPF do voluntário: "))
+                                    break
+                                except ValueError:
+                                    print("CPF inválido! Digite apenas números.")
+                            endereco = input("\nInforme seu bairro")
+                            while True:
+                                try:
+                                    contato = int(input("\nInforme seu melhor contato, apenas em números."))
+                                    break
+                                except ValueError:
+                                    print("Por favor, digite apenas números para o contato.")
+                                    
+                            while True:
+                                horas = input("n\Quantas horas semanais pode dedicar no voluntariado? Digite apenas números.")
+                                try:
+                                    int(horas)
+                                    break
+                                except ValueError:
+                                    print("Por favor, digite apenas números para as horas.")
+                                
+                            cadastrar_voluntario(nome, cpf, endereco, contato, horas)
                             maisum = input("Deseja cadastrar mais um voluntário? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            if maisum.lower() == 'n':                    
+                                break         
+                            
                     case "2":
                         while True:
                             nome = input("\nInforme o nome do voluntário a ser procurado: ")
@@ -165,24 +206,33 @@ def main2():
                             maisum = input("Deseja continuar buscando? (s/n): ")
                             if maisum.lower() == 'n':
                                 break
+                    
                     case "3":
                         while True:
                             nome_antigo = input("Informe o nome completo a ser atualizado (o nome antigo): ")
                             novo_nome = input("Informe o novo nome completo: ")
                             novo_ende = input("Informe o novo bairro do voluntário: ")
-                            novo_contato = input("Informe o novo contato do voluntário: ")
-                            novo_horario = input("Informe o novo horário disponível. Digitar apenas números: ")
+                            
+                            while True:
+                                novo_contato = input ("Informe o novo contato do voluntário, apenas em números: ")
+                                try:
+                                    int(novo_contato)
+                                    break
+                                except ValueError:
+                                    print("Por favor, digite apenas números para o novo contato.")
+                                    
+                            while True:
+                                novo_horario = input("Informe o novo horário disponível, apenas em números: ")
+                                try:
+                                    int(novo_horario)
+                                    break
+                                except ValueError:
+                                    print("Por favor, digite apenas números para o novo horário.") 
+                                    
                             atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario)
                             maisum = input("Deseja atualizar mais um voluntário? (s/n): ")
                             if maisum.lower() == 'n':
-                                break
-                    case "4":
-                        while True:
-                            nome = input("Qual o nome completo do voluntário que você deseja excluir? ")
-                            excluir_voluntario(nome)
-                            maisum = input("Deseja excluir mais um voluntário? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                                break    
                     case "5":
                         listar_voluntario()
                     case "6":
@@ -203,7 +253,7 @@ def main2():
                             idade = input("\nInforme a idade do animal (em anos): ")
                             porte = input("\nInforme o porte do animal (pequeno, médio e grande): ")
                             raca = input("\nInforme a raça do animal: ")
-                            historico_medico = input("\n Fale sobre o animal: É vermifugado? Possui as vacinas em dia? Realizou tratamento ou cirurgia recente? Acresce o que considerar): ")
+                            historico_medico = input("\n Fale sobre o animal: É vermifugado? Possui as vacinas em dia? Realizou tratamento ou cirurgia recente? Acrescente o que considerar necessário.): ")
                             cadastrar_animal(nome, especie, idade, porte, raca, historico_medico)
                             maisum = input("Deseja cadastrar mais um animal? (s/n): ")
                             if maisum.lower() == 'n':
@@ -221,12 +271,26 @@ def main2():
                             novo_nome = input("Informe o novo nome: ")
                             nova_especie = input("Informe a nova espécie do animal: ")
                             nova_idade = input("Informe a nova idade do animal: ")
-                            novo_dono = input("Informe o novo dono do animal: ")
-                            historico_medico = input("Informe o novo histórico médido do animal: ")
-                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono)
+                            historico_medico = input("Informe o novo histórico médico do animal: ")
+
+                            while True:
+                                adotado = input("O animal é adotado? (s/n): ").lower()
+                                if adotado == 's':
+                                        novo_dono = input("Informe o nome completo do dono do animal: ")
+                                        break
+                                elif adotado == 'n':
+                                        novo_dono = None
+                                        break
+                                else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                        continue
+
+                                
+                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico)
                             maisum = input("Deseja atualizar mais um animal? (s/n): ")
                             if maisum.lower() == 'n':
                                 break
+                            
                     case "4":
                         while True:
                             nome = input("Qual o nome do animal que você deseja excluir? ")
