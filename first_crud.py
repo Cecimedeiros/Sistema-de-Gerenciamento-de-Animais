@@ -1,6 +1,8 @@
 import json
 import os
 from time import sleep
+from sec_crud import main2
+from third_crud import main3
 
 caminho_arquivo= os.path.join(os.path.dirname(__file__), 'json_abrigo.json')
 
@@ -66,7 +68,7 @@ def buscar_abrigos(nome):
     if not abrigo_encontrado:
         print (" Nenhum abrigo encontrado!")
 
-def main (): 
+def main1 (): 
     print ("\n  <<-------- PLATAFORMA \"EM BUSCA DE UM LAR\" -------->>")
     print ("\n Olá, somos uma plataforma de gerenciamento de animais para adoção. \n Conectamos você com abrigos, animais e também recebemos voluntários para nos ajudar nessa causa especial! \n Vamos explorar a plataforma?! " )
     op= int(input ("\n Escolha uma opção abaixo: \n 1 - Quero conectar com um abrigo \n 2 - Quero me tornar voluntário(a)/ Sou voluntário(a) da plataforma \n 3 - Quero adotar um animal  \n 4 - Sair da plataforma \n O que deseja fazer no momento? "))
@@ -122,22 +124,22 @@ def main ():
             case "6":
                 print ("Voltando ao menu inicial...")
                 sleep (4)
-                main()  
+                main1()  
             case _: 
                 print ("Opção inválida! Tente novamente.")
     elif op==2:
-        print ("Leo e mel vai fazer")
+        main2 ()
     elif op==3: 
-        print ("Bia e Isa vai fazer ainda")
+        main3 ()
     elif op==4:  
         print ("Até logo!")
         fim ()
     else: 
         print ("Opção inválida, tente novamente! ")
-        main()
+        main1()
 def fim ():
     print ("Saindo da plataforma...")
     
 if __name__=="__main__":
-    main ()
-main ()
+    main1 ()
+main1 ()

@@ -1,55 +1,64 @@
 [
-   {
-      "nome": "memel",
-      "especie": "xiririr",
-      "idade": "akkaka",
-      "porte": "kaka",
-      "raca": "kak",
-      "historico_medico": "nana",
-      "dono": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds projeto aeda/projeto_crud/sec_crud.py\""
-   },
-   {
-      "nome": "lili",
-      "especie": "gatinho",
-      "idade": "1",
-      "porte": "pequeno",
-      "raca": "gato",
-      "historico_medico": "nao tem nada ainda"
-   },
-   {
-      "nome": "kk",
-      "especie": "kk",
-      "idade": "kk",
-      "porte": "kk",
-      "raca": "kk",
-      "historico_medico": "kk",
-      "dono": "melissa"
-   },
-   {
-      "nome": "mel",
-      "especie": "n",
-      "idade": "n",
-      "porte": "n",
-      "raca": "n",
-      "historico_medico": "n",
-      "dono": "melissa"
-   },
-   {
-      "nome": "lili",
-      "especie": "s",
-      "idade": "s",
-      "porte": "s",
-      "raca": "s",
-      "historico_medico": "s",
-      "dono": "s"
-   },
-   {
-      "nome": "serafina",
-      "especie": "gato",
-      "idade": "2",
-      "porte": "médio",
-      "raca": "angorá",
-      "historico_medico": "vacinada e vermifugada",
-      "dono": "melissa vitória filgueiras pereira"
-   }
+    {
+        "nome": "memel",
+        "especie": "xiririr",
+        "idade": "akkaka",
+        "porte": "kaka",
+        "raca": "kak",
+        "historico_medico": "nana",
+        "dono": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds projeto aeda/projeto_crud/sec_crud.py\""
+    },
+    {
+        "nome": "lili",
+        "especie": "gatinho",
+        "idade": "1",
+        "porte": "pequeno",
+        "raca": "gato",
+        "historico_medico": "nao tem nada ainda"
+    },
+    {
+        "nome": "kk",
+        "especie": "kk",
+        "idade": "kk",
+        "porte": "kk",
+        "raca": "kk",
+        "historico_medico": "kk",
+        "dono": "melissa"
+    },
+    {
+        "nome": "mel",
+        "especie": "n",
+        "idade": "n",
+        "porte": "n",
+        "raca": "n",
+        "historico_medico": "n",
+        "dono": "melissa"
+    },
+    {
+        "nome": "lili",
+        "especie": "s",
+        "idade": "s",
+        "porte": "s",
+        "raca": "s",
+        "historico_medico": "s",
+        "dono": "s"
+    },
+    {
+        "nome": "serafina",
+        "especie": "gato",
+        "idade": "2",
+        "porte": "médio",
+        "raca": "angorá",
+        "historico_medico": "vacinada e vermifugada",
+        "dono": "melissa vitória filgueiras pereira"
+    },
+    {
+        "nome": "amora",
+        "especie": "yorkishire",
+        "idade": "2",
+        "porte": "pequeno",
+        "raca": "yorkshire",
+        "historico_medico": "é vermifugado, não realizou nenhuma cirurgia. Tomou todas as vacinas.",
+        "dono": null
+    }
 ]

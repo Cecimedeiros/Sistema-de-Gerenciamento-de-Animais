@@ -83,7 +83,7 @@ def excluir_adotante(nome):
 
 
 
-def main():
+def main3():
     print("<<---- PLATAFORMA DE ADOÇÃO ---->>")
     print("Bem-vindo à plataforma de gerenciamento de adotantes!")
     while True:
@@ -182,4 +182,4 @@ def main():
                     print("Opção inválida! Tente novamente.")
 
 if __name__ == "__main__":
-    main()
+    main3()
