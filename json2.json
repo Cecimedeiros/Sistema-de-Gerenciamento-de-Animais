@@ -19,5 +19,19 @@
       "endereço": "lalala",
       "contato": " lalala",
       "horas": "lalla"
+   },
+   {
+      "nome": "ana maria",
+      "cpf": 917283721,
+      "endereço": "jordao",
+      "contato": "1072982",
+      "horas": "8"
+   },
+   {
+      "nome": "k",
+      "cpf": 7867897912,
+      "endereço": "madalena",
+      "contato": 28972918,
+      "horas": "2"
    }
 ]

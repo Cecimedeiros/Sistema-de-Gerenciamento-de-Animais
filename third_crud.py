@@ -79,15 +79,11 @@ def excluir_adotante(nome):
         print("Adotante não encontrado para exclusão.")
 
 
-
-
-
-
 def main3():
-    print("<<---- PLATAFORMA DE ADOÇÃO ---->>")
-    print("Bem-vindo à plataforma de gerenciamento de adotantes!")
+    #print("<<---- PLATAFORMA DE ADOÇÃO ---->>")
+    #print("Bem-vindo à plataforma de gerenciamento de adotantes!")
     while True:
-        op = int(input("\nEscolha uma ação:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Sair\nO que deseja fazer? "))
+        op = int(input("\nEscolha uma das ações:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Voltar para o menu inicial \nO que deseja fazer? "))
 
         match op:
             case 1:
@@ -153,7 +149,7 @@ def main3():
                         nome_novo= input ("Informe o novo nome: ")
                         print("\n1 - Boa Viagem", "\n2 - Casa Forte", "\n3 - Graças", "\n4 - Jaqueira", "\n5 - Torre", "\n6 - Várzea")
                         end_novo_adotante= input ("Informe o novo bairro do adotante: ")
-                        print("\n1 - Grande Porte" "\n2 - Porte" "\n3 - Pequeno Porte")
+                        print("\n1 - Grande Porte" "\n2 - Médio Porte" "\n3 - Pequeno Porte")
                         porte_novo_escolhido=input ("Informe qual o porte desejado: ")
                         novo_contato_adotante= input ("Informe o novo contato do adotante: ")
                         atualizar_adotante(nome_velho, nome_novo, end_novo_adotante, porte_novo_escolhido, novo_contato_adotante)
@@ -174,7 +170,7 @@ def main3():
                         
 
             case 6:
-                    print("Saindo da plataforma. Até logo!")
+                    print(" Voltando para o menu inicial...")
                     time.sleep(3)
                     break
 

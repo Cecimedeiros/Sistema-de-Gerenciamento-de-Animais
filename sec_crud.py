@@ -160,34 +160,35 @@ def buscar_animal(nome):
 
 def main2():
     while True:
-        op = input("\nEscolha uma opção: \n1 - Gerenciar voluntários \n2 - Gerenciar animais \n3 - Sair\n")
+        op = input("\nEscolha uma opção: \n1 - Quero gerenciar voluntários \n2 - Quero gerenciar animais \n3 - Voltar para o menu inicial \n")
         if op == '3':  
-            print("Saindo...")
+            print("Voltando...")
+            sleep (2)
             break
         elif op == '1':  
             while True:
-                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um voluntário \n2 - Visualizar informações de um voluntário \n3 - Atualizar informações sobre um voluntário \n4 - Excluir informações sobre um voluntário \n5 - Listar os voluntários existentes \n6 - Voltar ao menu inicial\n")
+                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um voluntário \n2 - Visualizar informações de um voluntário \n3 - Atualizar informações sobre um voluntário \n4 - Excluir informações sobre um voluntário \n5 - Listar os voluntários existentes \n6 - Voltar ao menu secundário\n")
                 match opcao:
                     case "1":
                         while True:
                             print("\n->>> CADASTRAMENTO DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
-                            nome = input("\nInforme o nome completo do voluntário a ser cadastrado: ")
+                            nome = input("\n Informe o nome completo do voluntário a ser cadastrado: ")
                             while True:
                                 try:
-                                    cpf = int(input("n\Informe o CPF do voluntário: "))
+                                    cpf = int(input("\n Informe o CPF do voluntário: "))
                                     break
                                 except ValueError:
                                     print("CPF inválido! Digite apenas números.")
-                            endereco = input("\nInforme seu bairro")
+                            endereco = input("\n Informe seu bairro: ")
                             while True:
                                 try:
-                                    contato = int(input("\nInforme seu melhor contato, apenas em números."))
+                                    contato = int(input("\n Informe seu melhor contato (apenas em números): "))
                                     break
                                 except ValueError:
                                     print("Por favor, digite apenas números para o contato.")
                                     
                             while True:
-                                horas = input("n\Quantas horas semanais pode dedicar no voluntariado? Digite apenas números.")
+                                horas = input("\n Informe quantas horas semanais pode dedicar no voluntariado (digite apenas números): ")
                                 try:
                                     int(horas)
                                     break
@@ -236,14 +237,15 @@ def main2():
                     case "5":
                         listar_voluntario()
                     case "6":
-                        print("Voltando ao menu inicial...")
+                        print("Voltando ao menu secundário...")
+                        sleep (3)
                         break
                     case _:
                         print("Opção inválida! Tente novamente.")
         
         elif op == '2': 
             while True:
-                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu inicial\n")
+                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu secundário\n")
                 match opcao:
                     case "1":
                         while True:
@@ -274,7 +276,7 @@ def main2():
                             historico_medico = input("Informe o novo histórico médico do animal: ")
 
                             while True:
-                                adotado = input("O animal é adotado? (s/n): ").lower()
+                                adotado = input("O animal já foi adotado? (s/n): ").lower()
                                 if adotado == 's':
                                         novo_dono = input("Informe o nome completo do dono do animal: ")
                                         break
@@ -301,7 +303,7 @@ def main2():
                     case "5":
                         listar_animais()
                     case "6":
-                        print("Voltando ao menu inicial...")
+                        print("Voltando ao menu secundário...")
                         break
                     case _:
                         print("Opção inválida! Tente novamente!")   
