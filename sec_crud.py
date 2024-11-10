@@ -8,16 +8,16 @@ caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'json2.json')
 
 def carregar_voluntario():
     if not os.path.exists(caminho_arquivocrud2):
-        with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
+        with open(caminho_arquivocrud2, 'w', encoding='utf-8') as arquivojson2_aberto:
             json.dump([], arquivojson2_aberto, indent=3)
-    with open(caminho_arquivocrud2, 'r') as arquivojson2_aberto:
+    with open(caminho_arquivocrud2, 'r', encoding='utf-8') as arquivojson2_aberto:
         return json.load(arquivojson2_aberto)
 
 def cadastrar_voluntario(nome, cpf, endereco, contato, horas):
     voluntarios = carregar_voluntario()
     
     voluntarios.append({'nome': nome, 'cpf': cpf, 'endereço': endereco, 'contato': contato, 'horas': horas})
-    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
+    with open(caminho_arquivocrud2, 'w', encoding='utf-8') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("O voluntário foi cadastrado!")
     
@@ -38,7 +38,7 @@ def excluir_voluntario(cpf):
     else:
         print("Voluntário não encontrado!")
         return
-    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
+    with open(caminho_arquivocrud2, 'w', encoding='utf-8') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("Dados do voluntário excluídos!")
 
@@ -66,7 +66,7 @@ def atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_h
     else:
         print("Voluntário não encontrado!")
         return
-    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto: 
+    with open(caminho_arquivocrud2, 'w', encoding='utf-8') as arquivojson2_aberto: 
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("Informações sobre o voluntário atualizadas!")
     
@@ -76,10 +76,10 @@ caminho_arquivocrud_animais = os.path.join(os.path.dirname(__file__), 'animais.j
 def carregar_animal():
     if not os.path.exists(caminho_arquivocrud_animais):
 
-        with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
+        with open(caminho_arquivocrud_animais, 'w', encoding='utf-8') as arquivojson_animais:
             json.dump([], arquivojson_animais, indent=3)
 
-    with open(caminho_arquivocrud_animais, 'r') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'r', encoding='utf-8') as arquivojson_animais:
         return json.load(arquivojson_animais)
 
 def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal):
@@ -95,7 +95,7 @@ def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo
         'caracteristica_animal': caracteristica_animal
         
     })
-    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding='utf-8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=4, ensure_ascii=False)
 
     print("O animal foi cadastrado!")
@@ -110,6 +110,8 @@ def listar_animal():
 
 def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal):
     animais = carregar_animal()
+    nome_antigo = nome_antigo.strip().lower()
+    animal_encontrado= False
     for animal in animais:
         if animal['nome'] == nome_antigo:
             animal['nome'] = novo_nome
@@ -119,33 +121,37 @@ def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono
             animal['historico_medico'] = historico_medico
             animal['abrigo'] = novo_abrigo
             animal['caracteristica_animal'] = nova_caracteristica_animal
-            
+            animal_encontrado= True
             break
 
-    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding='utf-8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
-    print("Informações sobre o animal atualizadas!")
-
+    if animal_encontrado: 
+        print("Informações sobre o animal atualizadas!")
+    else: 
+        print (" Animal não encontrado!")
 
 
 def excluir_animal(nome):
     animais = carregar_animal()
+    nome = nome.strip().lower ()
     for animal in animais:
-        if animal['nome'] == nome:
+        if animal['nome'].strip().lower() == nome:
             animais.remove(animal)
             break
     else:
         print("Animal não encontrado!")
         return
-    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding='utf-8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
     print("Dados do animal excluídos!")
 
 def buscar_animal(nome):
     animais = carregar_animal()
+    nome = nome.strip().lower ()
     encontrado = False
     for animal in animais:
-        if animal['nome'] == nome:
+        if animal['nome'].strip().lower() == nome:
             adotado = "Sim" if animal.get('dono') else "Não"
             dono = animal.get('dono', 'N/A')  # Se não tiver dono, mostra 'N/A'
             print(f"Nome: {animal['nome']}, \nEspécie: {animal['especie']}, \nIdade: {animal['idade']}, \nPorte: {animal['porte']}, \nRaça: {animal['raca']}, \nHistórico Médico: {animal['historico_medico']}, \nAdotado: {adotado}, \nNome do Dono: {dono}")
@@ -317,8 +323,8 @@ def main2():
                             idade = input("\nInforme a idade do animal (em anos): ")
                             porte = input("\nInforme o porte do animal (pequeno, médio e grande): ")
                             raca = input("\nInforme a raça do animal: ")
-                            abrigo = input ("\nInforme o nome do abrigo em que o animal está instalado.")
-                            historico_medico = input("\n Insira aqui o histórico médico do animal. (Ex: Se foi vacinado, castrado, vermifugado...): ")
+                            abrigo = input ("\nInforme o nome do abrigo em que o animal está instalado: ")
+                            historico_medico = input("\n Insira aqui o histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
                             caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite duas opções que mais combinam com o animal: ")
                             cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal)
                             
@@ -349,7 +355,7 @@ def main2():
                             
                             while True:                          
                                 try:
-                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    maisum = input("Deseja buscar mais um animal (s/n)? ").strip().lower()
                                     
                                     if maisum == 's':
                                         print(" ")
@@ -366,33 +372,35 @@ def main2():
                     case "3":
                         while True:
                             print("\n->>> ATUALIZAÇÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
+                            animais= carregar_animal ()
                             nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
-                            novo_nome = input("Informe o novo nome: ")
-                            nova_especie = input("Informe a nova espécie do animal: ")
-                            nova_idade = input("Informe a nova idade do animal: ")
-                            historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
-                            novo_abrigo = input ("\nInforme o novo nome do abrigo em que o animal está instalado.")
-                            caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite duas opções que mais combinam com o animal: ")
-                            
-
-                            while True:
-                                adotado = input("O animal já foi adotado? (s/n): ").lower()
-                                if adotado == 's':
-                                        novo_dono = input("Informe o nome completo do dono do animal: ")
-                                        break
-                                elif adotado == 'n':
-                                        novo_dono = None
-                                        break
-                                else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                        continue
-
+                            animal_encontrado = any (animal['nome'].strip().lower()==nome_antigo for animal in animais)
+                            if not animal_encontrado:
+                                print (" Não há informações desse abrigo no nosso sistema!")
+                            else: 
+                                novo_nome = input("Informe o novo nome: ")
+                                nova_especie = input("Informe a nova espécie do animal: ")
+                                nova_idade = input("Informe a nova idade do animal: ")
+                                historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
+                                novo_abrigo = input ("\nInforme o novo nome do abrigo em que o animal está instalado.")
+                                nova_caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite duas opções que mais combinam com o animal: ")
                                 
-                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal)
+                                while True:
+                                    adotado = input("O animal já foi adotado? (s/n): ").lower()
+                                    if adotado == 's':
+                                            novo_dono = input("Informe o nome completo do dono do animal: ")
+                                            break
+                                    elif adotado == 'n':
+                                            novo_dono = None
+                                            break
+                                    else:
+                                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                            continue   
+                                atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal)
                             
                             while True:                          
                                 try:
-                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    maisum = input("Deseja atualizar informações de mais um animal (s/n)? ").strip().lower()
                                     
                                     if maisum == 's':
                                         print(" ")
@@ -414,7 +422,7 @@ def main2():
                             
                             while True:                          
                                 try:
-                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    maisum = input("Deseja excluir informações de mais um animal (s/n)? ").strip().lower()
                                     
                                     if maisum == 's':
                                         print(" ")

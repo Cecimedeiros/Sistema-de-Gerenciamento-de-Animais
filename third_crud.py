@@ -1,7 +1,7 @@
 import json
 import os
 import time
-
+from sec_crud import carregar_animal
 
 caminho_arquivo = os.path.join(os.path.dirname(__file__), 'adotantes.json')
 
@@ -78,12 +78,32 @@ def excluir_adotante(nome):
     else:
         print("Adotante não encontrado para exclusão.")
 
+def verificar_preferencia_adotante(adotantes, animais):
+    nome_adotante = input("Informe o nome do adotante para verificar as preferências: ").strip().lower()
+    adotante_encontrado = None
+    for adotante in adotantes:
+        if adotante['nome'].strip().lower() == nome_adotante:
+            adotante_encontrado = adotante
+            break    
+    if not adotante_encontrado:
+        print("Adotante não encontrado.")
+        return  
+    print(f"Verificando preferências de adoção para {adotante_encontrado['nome']}...")
+    
+    preferencia = adotante_encontrado['preferencia_animal'].strip().lower()
+    
+    # Para cada animal na lista de animais
+    for animal in animais:
+        # Garantir que o porte do animal também seja uma string para a comparação
+        porte_animal = animal['porte'].strip().lower() if 'porte' in animal else ""
+        
+        # Comparar as preferências do adotante com as características do animal
+        if preferencia == porte_animal:
+            print(f"O animal {animal['nome']} atende às suas preferências!")
 
 def main3():
-    #print("<<---- PLATAFORMA DE ADOÇÃO ---->>")
-    #print("Bem-vindo à plataforma de gerenciamento de adotantes!")
     while True:
-        op = int(input("\nEscolha uma das ações:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Voltar para o menu inicial \nO que deseja fazer? "))
+        op = int(input("\nEscolha uma das ações:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Match \n7- Voltar para o menu inicial \nO que deseja fazer? "))
 
         match op:
             case 1:
@@ -128,8 +148,6 @@ def main3():
                     maisum = input("Deseja cadastrar mais um adotante? (s/n): ").strip().lower()
                     if maisum == 'n':
                         break
-                    
-
             case 2:
                     listar_adotantes()
 
@@ -144,7 +162,7 @@ def main3():
             case 5:
                     
                     print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ADOTANTE <<--")
-                    nome_velho= input ("Informe o nome do adotante que dejesa atualizar: ")
+                    nome_velho= input ("Informe o nome do adotante que deseja atualizar: ")
                     if nome_velho ==nome_velho:
                         nome_novo= input ("Informe o novo nome: ")
                         print("\n1 - Boa Viagem", "\n2 - Casa Forte", "\n3 - Graças", "\n4 - Jaqueira", "\n5 - Torre", "\n6 - Várzea")
@@ -165,11 +183,14 @@ def main3():
                                  break
                             
                             else:
-                                print('\n Escolha uma opção disponível no menu!')
-                                
-                        
-
+                                print('\n Escolha uma opção disponível no menu!')                     
             case 6:
+                
+                adotantes = carregar_adotantes()  # Carrega os adotantes
+                animais = carregar_animal()  # Carrega os animais
+                verificar_preferencia_adotante(adotantes, animais) 
+
+            case 7:       
                     print(" Voltando para o menu inicial...")
                     time.sleep(3)
                     break

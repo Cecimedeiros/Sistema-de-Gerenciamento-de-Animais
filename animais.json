@@ -1,123 +1,133 @@
 [
-    {
-        "nome": "lili",
-        "especie": "gatinho",
-        "idade": "1",
-        "porte": "pequeno",
-        "raca": "gato",
-        "historico_medico": "nao tem nada ainda"
-    },
-    {
-        "nome": "kk",
-        "especie": "kk",
-        "idade": "kk",
-        "porte": "kk",
-        "raca": "kk",
-        "historico_medico": "kk",
-        "dono": "melissa"
-    },
-    {
-        "nome": "mel",
-        "especie": "n",
-        "idade": "n",
-        "porte": "n",
-        "raca": "n",
-        "historico_medico": "n",
-        "dono": "melissa"
-    },
-    {
-        "nome": "lili",
-        "especie": "s",
-        "idade": "s",
-        "porte": "s",
-        "raca": "s",
-        "historico_medico": "s",
-        "dono": "s"
-    },
-    {
-        "nome": "serafina",
-        "especie": "gato",
-        "idade": "2",
-        "porte": "mÃ©dio",
-        "raca": "angorÃ¡",
-        "historico_medico": "vacinada e vermifugada",
-        "dono": "melissa vitÃ³ria filgueiras pereira"
-    },
-    {
-        "nome": "amora",
-        "especie": "yorkishire",
-        "idade": "2",
-        "porte": "pequeno",
-        "raca": "yorkshire",
-        "historico_medico": "Ã© vermifugado, nÃ£o realizou nenhuma cirurgia. Tomou todas as vacinas.",
-        "dono": null
-    },
-    {
-        "nome": "mel",
-        "especie": "lelel",
-        "idade": "lelel",
-        "porte": "lel",
-        "raca": "lelle",
-        "historico_medico": "lelel"
-    },
-    {
-        "nome": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds mergidos/projeto_crud/sec_crud.py\"",
-        "especie": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds mergidos/projeto_crud/sec_crud.py\"",
-        "idade": "aa",
-        "porte": "a",
-        "raca": "",
-        "historico_medico": "a"
-    },
-    {
-        "nome": "kakak",
-        "especie": "kakak",
-        "idade": "akka",
-        "porte": "kakka",
-        "raca": "kak",
-        "historico_medico": "kkkkkkk"
-    },
-    {
-        "nome": "kskksksk",
-        "especie": "kskks",
-        "idade": "skksk",
-        "porte": "kskk",
-        "raca": "kk",
-        "historico_medico": "k"
-    },
-    {
-        "nome": "mel",
-        "especie": "gato",
-        "idade": "lala",
-        "porte": "lala",
-        "raca": "lala",
-        "historico_medico": "lalala"
-    },
-    {
-        "nome": "lala",
-        "especie": "lalal",
-        "idade": "lalla",
-        "porte": "lal",
-        "raca": "lala",
-        "historico_medico": "lal"
-    },
-    {
-        "nome": "mel",
-        "especie": "gato",
-        "idade": "6",
-        "porte": "pequeno",
-        "raca": "vira lata",
-        "historico_medico": "vacinado, castrado",
-        "abrigo": "Luna sol",
-        "caracteristica_animal": "animal de apoio emocional, bravo"
-    },
-    {
-        "nome": "kiki",
-        "especie": "kiki",
-        "idade": "kiki00",
-        "porte": "medio",
-        "raca": "labrador",
-        "historico_medico": "kkk",
-        "abrigo": "luna sol",
-        "caracteristica_animal": "kkkk"
-    }
+   {
+      "nome": "lili",
+      "especie": "gatinho",
+      "idade": "1",
+      "porte": "pequeno",
+      "raca": "gato",
+      "historico_medico": "nao tem nada ainda"
+   },
+   {
+      "nome": "kk",
+      "especie": "kk",
+      "idade": "kk",
+      "porte": "kk",
+      "raca": "kk",
+      "historico_medico": "kk",
+      "dono": "melissa"
+   },
+   {
+      "nome": "mia",
+      "especie": "gato",
+      "idade": "2",
+      "porte": "n",
+      "raca": "n",
+      "historico_medico": "vacinado, sem cirurgia recente",
+      "dono": null,
+      "abrigo": " aloha",
+      "caracteristica_animal": "protetor e agitado"
+   },
+   {
+      "nome": "lili",
+      "especie": "s",
+      "idade": "s",
+      "porte": "s",
+      "raca": "s",
+      "historico_medico": "s",
+      "dono": "s"
+   },
+   {
+      "nome": "serafina",
+      "especie": "gato",
+      "idade": "2",
+      "porte": "mÃ©dio",
+      "raca": "angorÃ¡",
+      "historico_medico": "vacinada e vermifugada",
+      "dono": "melissa vitÃ³ria filgueiras pereira"
+   },
+   {
+      "nome": "amora",
+      "especie": "yorkishire",
+      "idade": "2",
+      "porte": "pequeno",
+      "raca": "yorkshire",
+      "historico_medico": "Ã© vermifugado, nÃ£o realizou nenhuma cirurgia. Tomou todas as vacinas.",
+      "dono": null
+   },
+   {
+      "nome": "mel",
+      "especie": "lelel",
+      "idade": "lelel",
+      "porte": "lel",
+      "raca": "lelle",
+      "historico_medico": "lelel"
+   },
+   {
+      "nome": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds mergidos/projeto_crud/sec_crud.py\"",
+      "especie": "& C:/Users/melis/AppData/Local/Programs/Python/Python312/python.exe \"c:/Users/melis/cruds mergidos/projeto_crud/sec_crud.py\"",
+      "idade": "aa",
+      "porte": "a",
+      "raca": "",
+      "historico_medico": "a"
+   },
+   {
+      "nome": "kakak",
+      "especie": "kakak",
+      "idade": "akka",
+      "porte": "kakka",
+      "raca": "kak",
+      "historico_medico": "kkkkkkk"
+   },
+   {
+      "nome": "kskksksk",
+      "especie": "kskks",
+      "idade": "skksk",
+      "porte": "kskk",
+      "raca": "kk",
+      "historico_medico": "k"
+   },
+   {
+      "nome": "mel",
+      "especie": "gato",
+      "idade": "lala",
+      "porte": "lala",
+      "raca": "lala",
+      "historico_medico": "lalala"
+   },
+   {
+      "nome": "lala",
+      "especie": "lalal",
+      "idade": "lalla",
+      "porte": "lal",
+      "raca": "lala",
+      "historico_medico": "lal"
+   },
+   {
+      "nome": "mel",
+      "especie": "gato",
+      "idade": "6",
+      "porte": "pequeno",
+      "raca": "vira lata",
+      "historico_medico": "vacinado, castrado",
+      "abrigo": "Luna sol",
+      "caracteristica_animal": "animal de apoio emocional, bravo"
+   },
+   {
+      "nome": "kiki",
+      "especie": "kiki",
+      "idade": "kiki00",
+      "porte": "medio",
+      "raca": "labrador",
+      "historico_medico": "kkk",
+      "abrigo": "luna sol",
+      "caracteristica_animal": "kkkk"
+   },
+   {
+      "nome": "kakau",
+      "especie": "vaca",
+      "idade": "10",
+      "porte": "Grande Porte",
+      "raca": "kak",
+      "historico_medico": "kkkkkkk"
+   }
 ]
