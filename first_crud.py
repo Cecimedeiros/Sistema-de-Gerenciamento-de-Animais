@@ -26,17 +26,18 @@ def listar_abrigo():
         print (" Nenhum abrigo cadastrado! ")
         return
     for abrigo in abrigos:
-        print (f" Nome: {abrigo['nome']}, \n Endereço: {abrigo['endereco']},\n Porte do animal: {abrigo['porte_animal']}, Contato: {abrigo['contato']} ")
+        print (f" Nome: {abrigo['nome']}, \n Endereço: {abrigo['endereco']},\n Porte do animal: {abrigo['porte_animal']}, \n Contato: {abrigo['contato']} ")
            
 def atualizar_abrigo (nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo_contato):
     abrigos= carregar_abrigo()
+    nome_antigo = nome_antigo.strip().lower()
     abrigo_encontrado = False
     for abrigo in abrigos:
-        if abrigo['nome'] == nome_antigo:
-            abrigo['nome']=novo_nome
+        if abrigo['nome'].strip().lower() == nome_antigo:
+            abrigo['nome']= novo_nome
             abrigo['endereco']= novo_ende
             abrigo['porte_animal']= novo_porte_animal
-            abrigo['contato']=novo_contato
+            abrigo['contato']= novo_contato
             abrigo_encontrado = True
             break
     with open (caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto: 
@@ -44,7 +45,7 @@ def atualizar_abrigo (nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo
     if abrigo_encontrado:
         print (" Informações sobre o abrigo atualizadas!")
     else:
-        print("Abrigo não encontrado!")
+        print(" Abrigo não encontrado!")
 
 def excluir_abrigo (nome):
     abrigos=carregar_abrigo()
@@ -87,70 +88,105 @@ def main1 ():
                         print ("\n ->>> CADASTRAMENTO DE ABRIGOS PARA ANIMAIS <<<-")
                         print ("\n Para cadastrar um novo abrigo é preciso que responda as seguintes perguntas: ")
                         nome=input("\n Informe o nome do abrigo a ser cadastrado: ")
-                        endereco= input ("\n Informe a localização do abrigo, o gerenciamento atende aos seguintes bairros: \n - Boa viagem \n - Casa Forte \n - Graças \n - Jaqueira \n - Torre \n - Várzea \n:")
+                        endereco= input ("\n O gerenciamento atende aos seguintes bairros: \n Boa viagem -- Casa Forte -- Graças -- Jaqueira -- Torre -- Várzea \n  Diante disso, informe a localização do abrigo:")
                         porte_animal= input ("\n Informe o porte dos animais que esse abrigo é capaz de abrigar (pequeno - médio - grande): ")
                         while True:
                             try:
                                 contato=input ("\n Informe o contato do abrigo: ")
                                 break
                             except ValueError:
-                                print("Por favor, digite apenas números!")
-                        cadastrar_abrigo(nome, endereco, porte_animal,contato)
-                        
-                        maisum= input ("\n Deseja cadastrar mais um abrigo (s/n) ?")
-                        if maisum.lower() == "n":
-                            break
-                        elif maisum.lower() != 's' or maisum.lower != 'n':
-                            print("Opção inválida!")
-                        
+                                print(" Por favor, digite apenas números!")
+                        cadastrar_abrigo(nome, endereco, porte_animal, contato)
+                        while True:                          
+                                try:
+                                    maisum = input(" Deseja cadastrar mais um abrigo (s/n)? ").strip().lower()                             
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print(" Voltando para o menu secundário...")
+                                        main1 () 
+                                    else:
+                                        print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f" Erro inesperado: {e}. Tente novamente.")                        
                 case "2": 
                     while True:
                         print ("\n ->-> BUSCA DE ABRIGOS PARA ANIMAIS <-<-")
                         nome=input("\n Informe o nome do abrigo a ser procurado: ")
                         buscar_abrigos(nome)
-                        
-                        maisum= input ("Deseja buscar mais um abrigo (s/n) ?")                      
-                        if maisum.lower() == "n":
-                            break
-                        elif maisum.lower() != 's' or maisum.lower != 'n':
-                            print("Opção inválida!")
-                        
+                        while True:                          
+                                try:
+                                    maisum = input(" Deseja buscar mais um abrigo (s/n)? ").strip().lower()                             
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print(" Voltando para o menu secundário...")
+                                        main1 () 
+                                    else:
+                                        print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f" Erro inesperado: {e}. Tente novamente.")
                 case "3":
                     while True:
                         print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ABRIGOS <<--")
-                        nome_antigo= input ("Informe o nome a ser atualizado (o nome antigo): ")
-                        if nome_antigo==nome_antigo:
-                            novo_nome= input ("Informe o novo nome: ")
-                            novo_ende= input ("Informe o novo endereço do abrigo (podendo estar localizado em: Boa viagem - Casa Forte - Graças - Jaqueira - Torre - Várzea): ")
-                            novo_porte_animal=input ("Informe o novo tipo de porte de animal que será abrigado pelo abrigo (pequeno - médio - grande): ")
-                            novo_contato= input ("Informe o novo contato do abrigo: ")
+                        nome_antigo= input (" Informe o nome do abrigo a ter suas informações atualizadas (o nome antigo): ").strip().lower()
+                        abrigos= carregar_abrigo ()
+                        abrigo_encontrado = any (abrigo['nome'].strip().lower()==nome_antigo for abrigo in abrigos)
+                        if not abrigo_encontrado:
+                            print (" Não há informações desse abrigo no nosso sistema!")
+                        else:
+                            novo_nome= input (" Informe o novo nome: ")
+                            novo_ende= input (" Informe o novo endereço do abrigo (podendo estar localizado em: Boa viagem - Casa Forte - Graças - Jaqueira - Torre - Várzea): ")
+                            novo_porte_animal=input (" Informe o novo tipo de porte de animal que será abrigado pelo abrigo (pequeno - médio - grande): ")
+                            novo_contato= input (" Informe o novo contato do abrigo: ")
                             atualizar_abrigo(nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo_contato)
                             
-                            maisum= input ("Deseja atualizar mais um abrigo (s/n) ?")
-                            if maisum.lower() == "n":
-                                break 
-                            elif maisum.lower() != 's' or maisum.lower != 'n':
-                                print("Opção inválida!")
-
+                            while True:                          
+                                try:
+                                    maisum = input(" Deseja atualizar mais um abrigo (s/n)? ").strip().lower()                             
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print(" Voltando para o menu secundário...")
+                                        main1 () 
+                                    else:
+                                        print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
                 case "4":
                     while True:
                         print ("\n ------> EXCLUSÃO DE DADOS DOS ABRIGOS PARA ANIMAIS <------")
-                        nome= input ("Qual o nome do abrigo você deseja excluir?")
+                        nome= input (" Qual o nome do abrigo você deseja excluir?")
                         excluir_abrigo(nome)
-                        maisum= input ("Deseja excluir mais um abrigo (s/n) ?")
-                        if maisum.lower() == "n" :
-                            break
-                        elif maisum.lower() != 's' or maisum.lower != 'n':
-                            print("Opção inválida!")
+                        while True:                          
+                            try:
+                                maisum = input(" Deseja excluir mais um abrigo (s/n)? ").strip().lower()                             
+                                if maisum == 's':
+                                    print(" ")
+                                    break  
+                                elif maisum == 'n':
+                                    print(" Voltando para o menu secundário...")
+                                    main1 () 
+                                else:
+                                    print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                            
+                            except Exception as e:
+                                print(f" Erro inesperado: {e}. Tente novamente.")
                         
                 case "5":
                     listar_abrigo()
                 case "6":
-                    print ("Voltando ao menu inicial...")
+                    print (" Voltando ao menu inicial...")
                     sleep (4)
                     main1()  
                 case _: 
-                    print ("Opção inválida! Tente novamente.")
+                    print (" Opção inválida! Tente novamente.")
         elif op==2:
             main2 ()
         elif op==3: 
@@ -159,10 +195,10 @@ def main1 ():
             fim()
             break
         else: 
-            print ("Opção inválida, tente novamente! ")
+            print (" Opção inválida, tente novamente! ")
             main1()
 def fim ():
-    print ("Saindo da plataforma...")
+    print (" Saindo da plataforma...")
     
 if __name__ == "__main__":
     main1 ()

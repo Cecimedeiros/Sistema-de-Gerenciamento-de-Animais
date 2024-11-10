@@ -1,9 +1,9 @@
 [
    {
-      "nome": "Luna sol",
-      "endereco": "Pina",
+      "nome": "Solar",
+      "endereco": "Casa Forte",
       "porte_animal": "pequeno",
-      "contato": "819990"
+      "contato": "819727632"
    },
    {
       "nome": "Pet lua",
@@ -12,10 +12,10 @@
       "contato": "909090"
    },
    {
-      "nome": "Aloha",
-      "endereco": "pina",
+      "nome": "ALOHA",
+      "endereco": "Boa viagem",
       "porte_animal": "pequeno",
-      "contato": "819"
+      "contato": "819379372"
    },
    {
       "nome": "Aves malucas",
@@ -52,5 +52,29 @@
       "endereco": "casa forte",
       "porte_animal": "médio",
       "contato": "19371987"
+   },
+   {
+      "nome": "dona maria",
+      "endereco": "boa viagem",
+      "porte_animal": "pequeno",
+      "contato": "1891872931"
+   },
+   {
+      "nome": "Abrigo região",
+      "endereco": "Graças",
+      "porte_animal": "médio",
+      "contato": "55615291"
+   },
+   {
+      "nome": "BAHIA PETS",
+      "endereco": "boa viagem",
+      "porte_animal": "pequeno",
+      "contato": "819827219"
+   },
+   {
+      "nome": "kia",
+      "endereco": "torre",
+      "porte_animal": "pequeno",
+      "contato": "192121"
    }
 ]
