@@ -2,12 +2,13 @@ import json
 import os
 from time import sleep
 
+
 caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'json2.json')
 
 
 def carregar_voluntario():
     if not os.path.exists(caminho_arquivocrud2):
-        with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto:
+        with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
             json.dump([], arquivojson2_aberto, indent=3)
     with open(caminho_arquivocrud2, 'r') as arquivojson2_aberto:
         return json.load(arquivojson2_aberto)
@@ -16,41 +17,42 @@ def cadastrar_voluntario(nome, cpf, endereco, contato, horas):
     voluntarios = carregar_voluntario()
     
     voluntarios.append({'nome': nome, 'cpf': cpf, 'endereço': endereco, 'contato': contato, 'horas': horas})
-    with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto:
+    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("O voluntário foi cadastrado!")
-
+    
 def listar_voluntario():
     voluntarios = carregar_voluntario()
     if not voluntarios:
         print("Nenhum voluntário cadastrado!")
         return
     for voluntario in voluntarios:
-        print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n Contato: {voluntario.get('contato')},\n Horas: {voluntario['horas']}, CPF: {voluntario['cpf']} ")
+        print(f"Nome: {voluntario.get('nome', 'Não informado')},\n Endereço: {voluntario.get('endereço', 'Não informado')},\n Contato: {voluntario.get('contato', 'Não informado')},\n Horas: {voluntario.get('horas', 'Não informado')}, CPF: {voluntario.get('cpf', 'Não informado')} ")
 
-def excluir_voluntario(nome):
+def excluir_voluntario(cpf):
     voluntarios = carregar_voluntario()
     for voluntario in voluntarios:
-        if voluntario['nome'] == nome:
+        if voluntario['cpf'] == cpf:
             voluntarios.remove(voluntario)
             break
     else:
         print("Voluntário não encontrado!")
         return
-    with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto:
+    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto:
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("Dados do voluntário excluídos!")
 
-def buscar_voluntario(nome):
+def buscar_voluntario(cpf):
     voluntarios = carregar_voluntario()
     encontrado = False
     for voluntario in voluntarios:
-        if voluntario['nome'] == nome:
-            print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario['endereço']},\n CPF: {voluntario['cpf']}, \n Contato: {voluntario.get('contato')} \n Horas: {voluntario['horas']}")
+        if voluntario['cpf'] == cpf:
+            print(f"Nome: {voluntario['nome']}, \n Endereço: {voluntario.get('endereço', 'Não informado')},\n CPF: {voluntario['cpf']}, \n Contato: {voluntario.get('contato', 'Não informado')} \n Horas: {voluntario.get('horas', 'Não informado')}")
             encontrado = True
             break
     if not encontrado:
         print("Nenhum voluntário encontrado!")
+
         
 def atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario):
     voluntarios = carregar_voluntario()
@@ -64,34 +66,24 @@ def atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_h
     else:
         print("Voluntário não encontrado!")
         return
-    with open(caminho_arquivocrud2, 'w') as arquivojson2_aberto: 
+    with open(caminho_arquivocrud2, 'w', encoding= 'utf8') as arquivojson2_aberto: 
         json.dump(voluntarios, arquivojson2_aberto, indent=3, ensure_ascii=False)
     print("Informações sobre o voluntário atualizadas!")
     
     
 caminho_arquivocrud_animais = os.path.join(os.path.dirname(__file__), 'animais.json')
 
-def carregar_animais():
+def carregar_animal():
     if not os.path.exists(caminho_arquivocrud_animais):
 
-        with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
+        with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
             json.dump([], arquivojson_animais, indent=3)
 
     with open(caminho_arquivocrud_animais, 'r') as arquivojson_animais:
         return json.load(arquivojson_animais)
 
-def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico):
-    adotado = ''
-    while adotado not in ['s', 'n']:
-        adotado = input("O animal é adotado? (s/n): ").lower()
-        if adotado == 's':
-            nome_dono = input("Informe o nome completo do dono: ")
-        elif adotado == 'n':
-            nome_dono = None
-        else:
-            print("Opção inválida! Digite 's' ou 'n'.")
-
-    animais = carregar_animais()
+def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal):
+    animais = carregar_animal()
     animais.append({
         'nome': nome,
         'especie': especie,
@@ -99,40 +91,45 @@ def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico):
         'porte': porte,
         'raca': raca,
         'historico_medico': historico_medico,
-        'dono': nome_dono
+        'abrigo': abrigo,
+        'caracteristica_animal': caracteristica_animal
+        
     })
-    with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=4, ensure_ascii=False)
 
     print("O animal foi cadastrado!")
     
-def listar_animais():
-    animais = carregar_animais()
+def listar_animal():
+    animais = carregar_animal()
     if not animais:
         print("Nenhum animal cadastrado!")
         return
     for animal in animais:
-        print(f"Nome: {animal['nome']}, \n Espécie: {animal['especie']}, \n Idade: {animal['idade']}, \n Porte: {animal['porte']}, \n Raça: {animal['raca']}, \n Histórico Médico: {animal['historico_medico']}")
+        print(f"Nome: {animal['nome']}, \n Espécie: {animal['especie']}, \n Idade: {animal['idade']}, \n Porte: {animal['porte']}, \n Raça: {animal['raca']}, \n Histórico Médico: {animal['historico_medico']} \n Abrigo: {animal['abrigo']} \n Características: {animal['caracteristica_animal']}" )
 
-def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico):
-    animais = carregar_animais()
+def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal):
+    animais = carregar_animal()
     for animal in animais:
         if animal['nome'] == nome_antigo:
             animal['nome'] = novo_nome
             animal['especie'] = nova_especie
             animal['idade'] = nova_idade
             animal['dono'] = novo_dono
-            animal['historico_medico'] = historico_medico  
+            animal['historico_medico'] = historico_medico
+            animal['abrigo'] = novo_abrigo
+            animal['caracteristica_animal'] = nova_caracteristica_animal
+            
             break
 
-    with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
     print("Informações sobre o animal atualizadas!")
 
 
 
 def excluir_animal(nome):
-    animais = carregar_animais()
+    animais = carregar_animal()
     for animal in animais:
         if animal['nome'] == nome:
             animais.remove(animal)
@@ -140,12 +137,12 @@ def excluir_animal(nome):
     else:
         print("Animal não encontrado!")
         return
-    with open(caminho_arquivocrud_animais, 'w') as arquivojson_animais:
+    with open(caminho_arquivocrud_animais, 'w', encoding= 'utf8') as arquivojson_animais:
         json.dump(animais, arquivojson_animais, indent=3, ensure_ascii=False)
     print("Dados do animal excluídos!")
 
 def buscar_animal(nome):
-    animais = carregar_animais()
+    animais = carregar_animal()
     encontrado = False
     for animal in animais:
         if animal['nome'] == nome:
@@ -196,21 +193,49 @@ def main2():
                                     print("Por favor, digite apenas números para as horas.")
                                 
                             cadastrar_voluntario(nome, cpf, endereco, contato, horas)
-                            maisum = input("Deseja cadastrar mais um voluntário? (s/n): ")
-                            if maisum.lower() == 'n':                    
-                                break         
                             
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja cadastrar mais um voluntário (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
+                                
                     case "2":
                         while True:
-                            nome = input("\nInforme o nome do voluntário a ser procurado: ")
-                            buscar_voluntario(nome)
-                            maisum = input("Deseja continuar buscando? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            print("\n->>> BUSCA DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
+                            cpf = input("\nInforme o CPF do voluntário a ser procurado: ")
+                            buscar_voluntario(cpf)
+                        
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja buscar mais um voluntário (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
                     
                     case "3":
                         while True:
-                            nome_antigo = input("Informe o nome completo a ser atualizado (o nome antigo): ")
+                            print("\n->>> ATUALIZAÇÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
+                            cpf = input("Informe o CPF do voluntário que a ser atualizado: ")
                             novo_nome = input("Informe o novo nome completo: ")
                             novo_ende = input("Informe o novo bairro do voluntário: ")
                             
@@ -230,11 +255,46 @@ def main2():
                                 except ValueError:
                                     print("Por favor, digite apenas números para o novo horário.") 
                                     
-                            atualizar_voluntario(nome_antigo, novo_nome, novo_ende, novo_contato, novo_horario)
-                            maisum = input("Deseja atualizar mais um voluntário? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break    
+                            atualizar_voluntario(cpf, novo_nome, novo_ende, novo_contato, novo_horario)
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja atualizar mais um voluntário (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
+                    case "4":
+                        while True:
+                            print("\n->>> EXCLUSÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
+                            cpf = input("Digite o CPF do voluntário que você deseja excluir: ")
+                            excluir_voluntario(cpf)
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja excluir mais um voluntário (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")                 
                     case "5":
+                        print("\n->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                         listar_voluntario()
                     case "6":
                         print("Voltando ao menu secundário...")
@@ -245,7 +305,9 @@ def main2():
         
         elif op == '2': 
             while True:
-                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu secundário\n")
+                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu secundário \n->>> ATENÇÃO: Antes de cadastrar um animal, verifique nossos abrigos disponíveis em Voltar ao Menu Secundário > Menu Principal > Listar Abrigos. ")
+                
+
                 match opcao:
                     case "1":
                         while True:
@@ -255,25 +317,63 @@ def main2():
                             idade = input("\nInforme a idade do animal (em anos): ")
                             porte = input("\nInforme o porte do animal (pequeno, médio e grande): ")
                             raca = input("\nInforme a raça do animal: ")
-                            historico_medico = input("\n Fale sobre o animal: É vermifugado? Possui as vacinas em dia? Realizou tratamento ou cirurgia recente? Acrescente o que considerar necessário.): ")
-                            cadastrar_animal(nome, especie, idade, porte, raca, historico_medico)
-                            maisum = input("Deseja cadastrar mais um animal? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            abrigo = input ("\nInforme o nome do abrigo em que o animal está instalado.")
+                            historico_medico = input("\n Insira aqui o histórico médico do animal. (Ex: Se foi vacinado, castrado, vermifugado...): ")
+                            caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite duas opções que mais combinam com o animal: ")
+                            cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal)
+                            
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
+                                
+                                
                     case "2":
                         while True:
+                            print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\nInforme o nome do animal a ser procurado: ")
                             buscar_animal(nome)
                             maisum = input("Deseja continuar buscando? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
+                                    
                     case "3":
                         while True:
+                            print("\n->>> ATUALIZAÇÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
                             novo_nome = input("Informe o novo nome: ")
                             nova_especie = input("Informe a nova espécie do animal: ")
                             nova_idade = input("Informe a nova idade do animal: ")
-                            historico_medico = input("Informe o novo histórico médico do animal: ")
+                            historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
+                            novo_abrigo = input ("\nInforme o novo nome do abrigo em que o animal está instalado.")
+                            caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite duas opções que mais combinam com o animal: ")
+                            
 
                             while True:
                                 adotado = input("O animal já foi adotado? (s/n): ").lower()
@@ -288,20 +388,49 @@ def main2():
                                         continue
 
                                 
-                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico)
-                            maisum = input("Deseja atualizar mais um animal? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal)
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
                             
                     case "4":
                         while True:
+                            print("\n->>> EXCLUSÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("Qual o nome do animal que você deseja excluir? ")
                             excluir_animal(nome)
-                            maisum = input("Deseja excluir mais um animal? (s/n): ")
-                            if maisum.lower() == 'n':
-                                break
+                            
+                            while True:                          
+                                try:
+                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
+                                    
+                                    if maisum == 's':
+                                        print(" ")
+                                        break  
+                                    elif maisum == 'n':
+                                        print("Voltando para o menu secundário...")
+                                        main2 () 
+                                    else:
+                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                                
+                                except Exception as e:
+                                    print(f"Erro inesperado: {e}. Tente novamente.")
+                                    
                     case "5":
-                        listar_animais()
+                        print("\n->>> LISTA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
+                        listar_animal()
                     case "6":
                         print("Voltando ao menu secundário...")
                         break
