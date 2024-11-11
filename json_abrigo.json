@@ -72,9 +72,27 @@
       "contato": "819827219"
    },
    {
-      "nome": "kia",
-      "endereco": "torre",
+      "nome": "Anos luz",
+      "endereco": " Jaqueira",
       "porte_animal": "pequeno",
-      "contato": "192121"
+      "contato": "8197266826"
+   },
+   {
+      "nome": "Grandes amores",
+      "endereco": "Torre",
+      "porte_animal": "médio",
+      "contato": "819738261826"
+   },
+   {
+      "nome": "sol do bem",
+      "endereco": " Boa viagem ",
+      "porte_animal": "medio",
+      "contato": "641235"
+   },
+   {
+      "nome": "Lua da felicidade",
+      "endereco": " casa forte",
+      "porte_animal": "grande",
+      "contato": "3621567"
    }
 ]

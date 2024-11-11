@@ -1,7 +1,7 @@
 import json
 import os
 from time import sleep
-from sec_crud import main2
+from sec_crud import main_animal, main_voluntario, voluntario_cadastrar
 from third_crud import main3
 
 caminho_arquivo= os.path.join(os.path.dirname(__file__), 'json_abrigo.json')
@@ -27,6 +27,7 @@ def listar_abrigo():
         return
     for abrigo in abrigos:
         print (f" Nome: {abrigo['nome']}, \n Endereço: {abrigo['endereco']},\n Porte do animal: {abrigo['porte_animal']}, \n Contato: {abrigo['contato']} ")
+        print ()
            
 def atualizar_abrigo (nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo_contato):
     abrigos= carregar_abrigo()
@@ -78,8 +79,8 @@ def main1 ():
     while True: 
         print ("\n  <<-------- PLATAFORMA \"EM BUSCA DE UM LAR\" -------->>")
         print ("\n Olá, somos uma plataforma de gerenciamento de animais para adoção. \n Conectamos você com abrigos, animais e também recebemos voluntários para nos ajudar nessa causa especial! \n Vamos explorar a plataforma?! " )
-        op= int(input ("\n Escolha uma opção abaixo: \n 1 - Quero conectar com um abrigo \n 2 - Quero me tornar voluntário(a)/ Sou voluntário(a) da plataforma \n 3 - Quero adotar um animal  \n 4 - Sair da plataforma \n O que deseja fazer no momento? "))
-  
+        op= int(input ("\n Escolha uma opção abaixo: \n 1 - Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos \n 2 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os animais \n 3 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os voluntários \n 4 - Quero me tornar voluntário(a) da plataforma \n 5 - Quero adotar um animal  \n 6 - Sair da plataforma \n O que deseja fazer no momento? "))
+
         if op== 1: 
             opcao=input("\n Dentre as seguintes opções:  \n 1- Cadastrar um abrigo \n 2- Vizualizar informações do abrigo \n 3- Atualizar informações sobre o abrigo \n 4- Excluir informações sobre o abrigo \n 5- Listar os abrigos existentes \n 6- Voltar ao menu inicial \n O que você deseja fazer agora? ")
             match (opcao):
@@ -104,7 +105,7 @@ def main1 ():
                                         print(" ")
                                         break  
                                     elif maisum == 'n':
-                                        print(" Voltando para o menu secundário...")
+                                        print(" Voltando para o menu inicial...")
                                         main1 () 
                                     else:
                                         print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
@@ -123,7 +124,7 @@ def main1 ():
                                         print(" ")
                                         break  
                                     elif maisum == 'n':
-                                        print(" Voltando para o menu secundário...")
+                                        print(" Voltando para o menu inicial...")
                                         main1 () 
                                     else:
                                         print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
@@ -139,6 +140,7 @@ def main1 ():
                         if not abrigo_encontrado:
                             print (" Não há informações desse abrigo no nosso sistema!")
                         else:
+                            print ("\n Caso houver informações as quais não queira atualizar a informação, coloque as informações antigas! \n ")
                             novo_nome= input (" Informe o novo nome: ")
                             novo_ende= input (" Informe o novo endereço do abrigo (podendo estar localizado em: Boa viagem - Casa Forte - Graças - Jaqueira - Torre - Várzea): ")
                             novo_porte_animal=input (" Informe o novo tipo de porte de animal que será abrigado pelo abrigo (pequeno - médio - grande): ")
@@ -152,7 +154,7 @@ def main1 ():
                                         print(" ")
                                         break  
                                     elif maisum == 'n':
-                                        print(" Voltando para o menu secundário...")
+                                        print(" Voltando para o menu inicial...")
                                         main1 () 
                                     else:
                                         print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
@@ -171,7 +173,7 @@ def main1 ():
                                     print(" ")
                                     break  
                                 elif maisum == 'n':
-                                    print(" Voltando para o menu secundário...")
+                                    print(" Voltando para o menu inicial...")
                                     main1 () 
                                 else:
                                     print(" Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
@@ -188,10 +190,25 @@ def main1 ():
                 case _: 
                     print (" Opção inválida! Tente novamente.")
         elif op==2:
-            main2 ()
+            main_animal ()
         elif op==3: 
+            main_voluntario()
+        elif op==4:
+            while True:
+                try:
+                    resp= input ("\n Deseja cadastrar um(a) novo(a) voluntário(a) na plataforma (s/n)?")
+                    if resp=="s":
+                        voluntario_cadastrar()
+                    elif resp == 'n':
+                        print("Voltando para o menu inicial...")
+                        main1 () 
+                    else:
+                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                except Exception as e:
+                    print(f"Erro inesperado: {e}. Tente novamente.") 
+        elif op==5:
             main3 ()
-        elif op==4:  
+        elif op==6:  
             fim()
             break
         else: 
@@ -203,3 +220,4 @@ def fim ():
 if __name__ == "__main__":
     main1 ()
 main1 ()
+fim ()

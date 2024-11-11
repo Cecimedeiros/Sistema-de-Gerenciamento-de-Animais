@@ -1,5 +1,5 @@
 from first_crud import main1, carregar_abrigo, atualizar_abrigo, buscar_abrigos, excluir_abrigo, cadastrar_abrigo, listar_abrigo, fim
-from sec_crud import carregar_animal, atualizar_animal, buscar_animal, excluir_animal, cadastrar_animal, main2, carregar_voluntario, buscar_voluntario, cadastrar_voluntario, excluir_voluntario, listar_animal, listar_voluntario, atualizar_voluntario
+from sec_crud import carregar_animal, atualizar_animal, buscar_animal, excluir_animal, cadastrar_animal, main_animal, carregar_voluntario, buscar_voluntario, cadastrar_voluntario, excluir_voluntario, listar_animal, listar_voluntario, atualizar_voluntario, main_voluntario
 from third_crud import carregar_adotantes, cadastrar_adotante, atualizar_adotante, buscar_adotante, excluir_adotante, listar_adotantes, main3
 
 def processo_abrigos():
@@ -19,14 +19,14 @@ def processo_volutarios():
     excluir_voluntario('cpf')
     buscar_voluntario('cpf')
     atualizar_voluntario('cpf','novo_nome', 'novo_ende', 'novo_contato', 'novo_horario' )
-    main2()
+    main_voluntario()
     carregar_animal()
     cadastrar_animal('nome', 'especie','idade', 'porte', 'raca', 'historico_medico')
     listar_animal()
     atualizar_animal('nome_antigo', 'novo_nome', 'nova_especie', 'nova_idade', 'novo_dono')
     excluir_animal('nome')
     buscar_animal('nome')
-    main2()
+    main_animal()
 
 def processo_adotantes():
     carregar_adotantes ()
@@ -36,7 +36,6 @@ def processo_adotantes():
     atualizar_adotante('nome_velho', 'nome_novo', 'end_novo_adotante', 'porte_novo_escolhido','novo_contato_adotante')
     excluir_adotante('nome')
     main3()
-
 
 def menu():
     print ("\n  <<-------- PLATAFORMA \"EM BUSCA DE UM LAR\" -------->>")
@@ -58,3 +57,6 @@ def menu():
         print("Opção inválida, tente novamente! ")
         menu()
 
+
+
+main1 ()
