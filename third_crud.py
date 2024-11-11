@@ -7,12 +7,12 @@ caminho_arquivo = os.path.join(os.path.dirname(__file__), 'adotantes.json')
 
 def carregar_adotantes():
     if not os.path.exists(caminho_arquivo):
-        with open(caminho_arquivo, 'w') as arquivojson_aberto:
+        with open(caminho_arquivo, 'w',  encoding='utf-8') as arquivojson_aberto:
             json.dump([], arquivojson_aberto, indent=3)
 
     dados = []
 
-    with open(caminho_arquivo, 'r') as arquivojson_aberto:
+    with open(caminho_arquivo, 'r', encoding='utf-8') as arquivojson_aberto:
         if not isinstance(dados, list):
             return []
         return json.load(arquivojson_aberto)
@@ -26,7 +26,7 @@ def cadastrar_adotante(nome, idade, bairro, contato, preferencia_animal):
         'contato': contato,
         'preferencia_animal': preferencia_animal
     })
-    with open(caminho_arquivo, 'w') as arquivojson_aberto:
+    with open(caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto:
         json.dump(adotantes, arquivojson_aberto, indent=3, ensure_ascii=False)
     print("Adotante cadastrado com sucesso!")
 
@@ -63,7 +63,7 @@ def atualizar_adotante(nome_velho, nome_novo, end_novo_adotante, porte_novo_esco
             adotante['porte']= porte_novo_escolhido
             adotante['contato']= novo_contato_adotante
             break
-    with open(caminho_arquivo, 'w') as arquivojson_aberto:
+    with open(caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto:
             json.dump(adotantes, arquivojson_aberto, indent=3, ensure_ascii=False)
     print("Adotante atualizado com sucesso!")            
 
@@ -72,7 +72,7 @@ def excluir_adotante(nome):
     adotantes_filtrados = [adotante for adotante in adotantes if adotante['nome'] != nome]
     
     if len(adotantes_filtrados) < len(adotantes):
-        with open(caminho_arquivo, 'w') as arquivojson_aberto:
+        with open(caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto:
             json.dump(adotantes_filtrados, arquivojson_aberto, indent=3, ensure_ascii=False)
         print("Adotante excluído com sucesso!")
     else:
@@ -92,12 +92,10 @@ def verificar_preferencia_adotante(adotantes, animais):
     
     preferencia = adotante_encontrado['preferencia_animal'].strip().lower()
     
-    # Para cada animal na lista de animais
     for animal in animais:
-        # Garantir que o porte do animal também seja uma string para a comparação
         porte_animal = animal['porte'].strip().lower() if 'porte' in animal else ""
         
-        # Comparar as preferências do adotante com as características do animal
+        
         if preferencia == porte_animal:
             print(f"O animal {animal['nome']} atende às suas preferências!")
 

@@ -5,7 +5,7 @@
       "bairro": "várzea",
       "contato": "78586544",
       "preferencia_animal": "Grande porte",
-      "endere�o": "2",
+      "endereço": "2",
       "porte": "1"
    },
    {
@@ -13,8 +13,8 @@
       "idade": "92",
       "bairro": "Casa Forte",
       "contato": "2389287",
-      "preferencia_animal": "M�dio Porte",
-      "endere�o": "1",
+      "preferencia_animal": "Médio Porte",
+      "endereço": "1",
       "porte": "2"
    },
    {
@@ -23,7 +23,7 @@
       "bairro": "Casa Forte",
       "contato": "2389287",
       "preferencia_animal": "Pequeno",
-      "endere�o": "1",
+      "endereço": "1",
       "porte": "2"
    }
 ]
