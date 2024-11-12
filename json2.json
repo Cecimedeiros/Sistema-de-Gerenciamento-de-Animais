@@ -1,16 +1,9 @@
 [
    {
-      "nome": "Filipe Antônio Souza",
-      "cpf": "1010101010",
-      "endereço": "Ilha do leite",
-      "contato": 716281763,
-      "horas": "2"
-   },
-   {
-      "nome": "Gabriela Maria Fernandes",
+      "nome": "Gabriela Maria Fernandes da Silva",
       "cpf": "98762123452",
-      "endereço": "Ibura",
-      "contato": 81717221,
-      "horas": "3"
+      "endereço": "Poço da Panela",
+      "contato": "81717221",
+      "horas": "2"
    }
 ]

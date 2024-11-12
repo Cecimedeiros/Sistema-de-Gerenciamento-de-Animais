@@ -89,7 +89,7 @@ def main1 ():
                     print ("\n ->>> CADASTRAMENTO DE ABRIGOS PARA ANIMAIS <<<-")
                     print ("\n Para cadastrar um novo abrigo é preciso que responda as seguintes perguntas: ")
                     nome=input("\n Informe o nome do abrigo a ser cadastrado: ")
-                    endereco= input ("\n O gerenciamento atende aos seguintes bairros: \n   Boa viagem -- Casa Forte -- Graças -- Jaqueira -- Torre -- Várzea \n Diante disso, informe a localização do abrigo:")
+                    endereco= input ("\n O gerenciamento atende aos seguintes bairros: \n   Boa viagem -- Casa Forte -- Graças -- Jaqueira -- Torre -- Várzea \n Diante disso, informe a localização do abrigo: ")
                     porte_animal= input ("\n Informe o porte dos animais que esse abrigo é capaz de abrigar (pequeno - médio - grande): ")
                     while True:
                         contato = input("\n Informe o contato do abrigo: ")
@@ -155,7 +155,8 @@ def main1 ():
         elif op==5:
             main3 ()
         elif op == 6:
-            print(" Saindo da plataforma...")
+            print ("Obrigada por utilizar nossos serviços! :)")
+            print("Saindo da plataforma...")
             sleep(2) 
             break
         else:

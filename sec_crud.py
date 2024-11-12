@@ -84,7 +84,7 @@ def carregar_animal():
     with open(caminho_arquivocrud_animais, 'r', encoding='utf-8') as arquivojson_animais:
         return json.load(arquivojson_animais)
 
-def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal):
+def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal, sexo):
     animais = carregar_animal()
     animais.append({
         'nome': nome,
@@ -94,7 +94,8 @@ def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo
         'raca': raca,
         'historico_medico': historico_medico,
         'abrigo': abrigo,
-        'caracteristica_animal': caracteristica_animal
+        'caracteristica_animal': caracteristica_animal,
+        'sexo': sexo
         
     })
     with open(caminho_arquivocrud_animais, 'w', encoding='utf-8') as arquivojson_animais:
@@ -103,15 +104,28 @@ def cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo
     print("O animal foi cadastrado!")
     
 def listar_animal():
-    animais = carregar_animal()
+    animais = carregar_animal()  
     if not animais:
-        print("Nenhum animal cadastrado!")
+        print("Nenhum animal cadastrado.")
         return
-    for animal in animais:
-        print(f"Nome: {animal['nome']}, \n Espécie: {animal['especie']}, \n Idade: {animal['idade']}, \n Porte: {animal['porte']}, \n Raça: {animal['raca']}, \n Histórico Médico: {animal['historico_medico']} \n Abrigo: {animal['abrigo']} \n Características: {animal['caracteristica_animal']}" )
-        print ()
 
-def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal):
+    for animal in animais:
+        
+        nome = animal.get('nome', 'Não especificado')
+        especie = animal.get('especie', 'Não especificado')
+        idade = animal.get('idade', 'Não especificado')
+        porte = animal.get('porte', 'Não especificado')
+        raca = animal.get('raca', 'Não especificado')
+        historico_medico = animal.get('historico_medico', 'Não especificado')
+        abrigo = animal.get('abrigo', 'Não especificado')
+        caracteristica_animal = animal.get('caracteristica_animal', 'Não especificado')
+        sexo = animal.get('sexo', 'Não especificado')
+        
+        print(f"Nome: {nome}, \nEspécie: {especie}, \nIdade: {idade}, \nPorte: {porte}, \nRaça: {raca}, \nHistórico Médico: {historico_medico}, \nAbrigo: {abrigo}, \nCaracterísticas: {caracteristica_animal}, \nSexo: {sexo}")
+        print()  
+
+
+def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo):
     animais = carregar_animal()
     nome_antigo = nome_antigo.strip().lower()
     animal_encontrado= False
@@ -124,6 +138,7 @@ def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono
             animal['historico_medico'] = historico_medico
             animal['abrigo'] = novo_abrigo
             animal['caracteristica_animal'] = nova_caracteristica_animal
+            animal['sexo'] = novo_sexo
             animal_encontrado= True
             break
 
@@ -155,7 +170,7 @@ def buscar_animal(nome):
     for animal in animais:
         if animal['nome'].strip().lower() == nome:
             adotado = "Sim" if animal.get('dono') else "Não"
-            dono = animal.get('dono', 'N/A')  # Se não tiver dono, mostra 'N/A'
+            dono = animal.get('dono', 'N/A')  
             print(f"Nome: {animal['nome']}, \nEspécie: {animal['especie']}, \nIdade: {animal['idade']}, \nPorte: {animal['porte']}, \nRaça: {animal['raca']}, \nHistórico Médico: {animal['historico_medico']}, \nAdotado: {adotado}, \nNome do Dono: {dono}")
             encontrado = True
             break
@@ -219,8 +234,7 @@ def main_voluntario():
                                     print("\n->>> BUSCA DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("\nInforme o CPF do voluntário a ser procurado: ")
                                     buscar_voluntario(cpf)
-                                    if not continuar_operacao ("Buscar mais um voluntário"):
-                                        return
+                                    
                                     while True:                          
                                         try:
                                             maisum = input("Deseja buscar mais um voluntário (s/n)? ").strip().lower()
@@ -265,7 +279,7 @@ def main_voluntario():
                                                 print("Por favor, digite apenas números para o novo horário.") 
                                                 
                                         atualizar_voluntario(cpf, novo_nome, novo_ende, novo_contato, novo_horario)   
-                                        if not continuar_operacao ("Excluir mais um voluntário"):
+                                        if not continuar_operacao ("Deseja atualizar mais um voluntário"):
                                             return
                                         
                             case "3":
@@ -290,14 +304,16 @@ def main_voluntario():
                                         except Exception as e:
                                             print(f"Erro inesperado: {e}. Tente novamente.")                 
                             case "4":
-                                    print("\n->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
-                                    listar_voluntario()
+
+                                print("\n->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
+                                listar_voluntario()
+                                
                             case "5":
                                 print("Voltando ao menu inicial...")
                                 sleep (2)
                                 break
                             case "6":
-                                print ("Saindo da plataforma...")
+                                print ("Saindo da plataforma...Até mais! :)")
                                 exit()
                             case _:
                                 print("Opção inválida! Tente novamente.")
@@ -317,99 +333,165 @@ def continuar_operacao(operacao):
         if resposta == 's':
             return True
         elif resposta == 'n':
-            print("Voltando para o menu anterior...")
+            print("Voltando para o menu secundário...")
             sleep(2)
             return False
         else:
             print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
 
 
+
+
+
+
+
+
+
 def main_animal():                 
-            while True:
-                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n \n->>> ATENÇÃO: Antes de cadastrar um animal, verifique nossos abrigos disponíveis em 'Voltar ao Menu Secundário' > 'Voltar ao Menu Inicial' > 'Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos' > 'Listar Abrigos'<<<- \n \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu Inicial \n7 - Sair da plataforma \nOpção: ")
-               
-                match opcao:
-                    case "1":
-                        while True:
-                            print("\n->>> CADASTRAMENTO DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
-                            nome = input("\nInforme o nome do animal a ser cadastrado: ")
-                            especie = input("Escolha o número da preferência de espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
-                            idade = input("\nInforme a idade do animal (em anos): ")
-                            porte = input("Escolha o número da preferência desejada \n 1 - Pequeno porte \n 2 Médio porte \n 3 - Grande porte : ")
-                            raca = input("\nInforme a raça do animal: ")
-                            abrigo = input ("\nInforme o nome do abrigo em que o animal está instalado: ")
-                            historico_medico = input("\nInsira aqui o histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
-                            while True:
-                                try:
-                                    caracteristica_animal = input ("\nDentre as seguintes características: \n -->> companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional <<-- \nDigite uma opção que mais combinam com o animal: ") 
-                                    break
-                                except ValueError:
-                                    print(" Por favor, digite apenas uma!")
-                            cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal)
-                            
-                            if not continuar_operacao("Cadastrar mais um animal"):
-                                return           
-                    case "2":
-                        while True:
-                            print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
-                            nome = input("\nInforme o nome do animal a ser procurado: ")
-                            buscar_animal(nome)
-                            
-                            if not continuar_operacao("buscar mais um animal"):
-                                return              
-                    case "3":
-                        while True:
-                            print("\n->>> ATUALIZAÇÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
-                            animais= carregar_animal ()
-                            nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
-                            animal_encontrado = any (animal['nome'].strip().lower()==nome_antigo for animal in animais)
-                            if not animal_encontrado:
-                                print (" Não há informações desse abrigo no nosso sistema!")
-                            else: 
-                                novo_nome = input("Informe o novo nome: ")
-                                nova_especie = input("Informe a nova espécie do animal: ")
-                                nova_idade = input("Informe a nova idade do animal: ")
-                                historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
-                                novo_abrigo = input ("Informe o novo nome do abrigo em que o animal está instalado: ")
-                                nova_caracteristica_animal = input ("\nDentre as seguintes características: \n companheiro -- bravo -- protetor -- quieto -- agitado -- preguiçoso -- animal de apoio emocional \nDigite uma opção que mais combinam com o animal: ")
-                                
-                                while True:
-                                    adotado = input("O animal já foi adotado? (s/n): ").lower()
-                                    if adotado == 's':
-                                            novo_dono = input("Informe o nome completo do dono do animal: ")
-                                            break
-                                    elif adotado == 'n':
-                                            novo_dono = None
-                                            break
-                                    else:
-                                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                            continue   
-                                atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal)
-                            
-                            if not continuar_operacao("atualizar mais um animal"):
-                                return
-                    case "4":
-                        while True:
-                            print("\n->>> EXCLUSÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
-                            nome = input("Qual o nome do animal que você deseja excluir? ")
-                            excluir_animal(nome)
-                            
-                            if not continuar_operacao("excluir mais um animal"):
-                                return
-                    case "5":
-                        print("\n->>> LISTA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
-                        listar_animal()
-                        if not continuar_operacao("listar novamente"):
-                            return
-                    case "6":
-                        print("Voltando ao menu inicial...")
-                        sleep (2)
+    while True:
+        opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n \n->>> ATENÇÃO: Antes de cadastrar um animal, verifique nossos abrigos disponíveis em 'Voltar ao Menu Secundário' > 'Voltar ao Menu Inicial' > 'Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos' > 'Listar Abrigos'<<<- \n \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu Inicial \n7 - Sair da plataforma \nOpção: ")
+       
+        match opcao:
+            case "1":
+                while True:
+                    nome = input("\nInforme o nome do animal a ser cadastrado: ")
+                    especie = input("\nEscolha o número de acordo com a espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
+                    idade = input("\nInforme a idade do animal (em anos): ")
+                    porte = input("\nEscolha o número da preferência desejada \n1 - Pequeno porte \n2 - Médio porte \n3 - Grande porte : ")
+                    raca = input("\nInforme a raça do animal: ")
+                    abrigo = input("\nInforme o nome do abrigo em que o animal está instalado: ")
+                    
+                    while True:
+                        sexo = input("\nInforme o sexo do animal: \n1 - Macho \n2 - Fêmea : ")
+                        if sexo == "1":
+                            sexo = "macho"
+                            break
+                        elif sexo == "2":
+                            sexo = "fêmea"
+                            break
+                        else:
+                            print("Opção inválida! Por favor, digite '1' para macho ou '2' para fêmea.")
+                    
+                    print("\nDentre as características:")
+                    print("1 - Companheiro\n2 - Bravo\n3 - Protetor\n4 - Quieto\n5 - Agitado\n6 - Preguiçoso\n7 - Animal de apoio emocional")
+                    while True:
+                        caracteristica_animal = input("Escolha uma característica que mais combina com o animal: ")
+                        if caracteristica_animal in ['1', '2', '3', '4', '5', '6', '7']:
+                            break
+                        else:
+                            print("\nOpção inválida! Escolha um número de 1 a 7.")
+                    
+                    historico_medico = input("\nInsira aqui o histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
+                    
+                    cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal, sexo)
+                    
+                    while True:
+                        nova_operacao = input("\nDeseja cadastrar mais um animal? (s/n): ").lower()
+                        if nova_operacao == 's' or nova_operacao == 'n':
+                            break
+                        else:
+                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                    
+                    if nova_operacao == 'n':
                         break
-                    case "7":
-                        print ("Saindo da plataforma... Até mais!")
-                        exit ()
-                    case _:
-                        print("Opção inválida! Tente novamente!")   
+
+            case "2":
+                while True:
+                    print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
+                    nome = input("\nInforme o nome do animal a ser procurado: ")
+                    buscar_animal(nome)
+                    
+                    while True:
+                        nova_operacao = input("\nDeseja buscar mais um animal? (s/n): ").lower()
+                        if nova_operacao == 's' or nova_operacao == 'n':
+                            break
+                        else:
+                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                    
+                    if nova_operacao == 'n':
+                        break
+
+            case "3":
+                while True:
+                    animais = carregar_animal()
+                    nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
+                    animal_encontrado = any(animal['nome'].strip().lower() == nome_antigo for animal in animais)
+                    if not animal_encontrado:
+                        print("Não há informações desse animal no nosso sistema!")
+                    else: 
+                        novo_nome = input("Informe o novo nome: ")
+                        nova_especie = input("Informe a nova espécie do animal: ")
+                        nova_idade = input("Informe a nova idade do animal: ")
+                        
+                        while True:
+                            novo_sexo = input("Informe o sexo do animal: \n1 - Macho \n2 - Fêmea : ")
+                            if novo_sexo == "1":
+                                novo_sexo = "macho"
+                                break
+                            elif novo_sexo == "2":
+                                novo_sexo = "fêmea"
+                                break
+                            else:
+                                print("Opção inválida! Por favor, digite '1' para macho ou '2' para fêmea.")
+                        
+                        print("\nDentre as características:")
+                        print("1 - Companheiro\n2 - Bravo\n3 - Protetor\n4 - Quieto\n5 - Agitado\n6 - Preguiçoso\n7 - Animal de apoio emocional")
+                        while True:
+                            nova_caracteristica_animal = input("Escolha uma característica que mais combina com o animal: ")
+                            if nova_caracteristica_animal in ['1', '2', '3', '4', '5', '6', '7']:
+                                break
+                            else:
+                                print("Opção inválida! Escolha um número de 1 a 7.")
+                        
+                        historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
+                        novo_abrigo = input("Informe o novo nome do abrigo em que o animal está instalado: ")
+                        adotado = input("O animal já foi adotado? (s/n): ").lower()
+                        novo_dono = input("Informe o nome completo do dono do animal: ") if adotado == 's' else None
+                        
+                        atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo)
+                    
+                    while True:
+                        nova_operacao = input("\nDeseja atualizar mais um animal? (s/n): ").lower()
+                        if nova_operacao == 's' or nova_operacao == 'n':
+                            break
+                        else:
+                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                    
+                    if nova_operacao == 'n':
+                        break
+
+            case "4":
+                while True:
+                    nome = input("Qual o nome do animal que você deseja excluir? ")
+                    excluir_animal(nome)
+                    
+                    while True:
+                        nova_operacao = input("\nDeseja excluir mais um animal? (s/n): ").lower()
+                        if nova_operacao == 's' or nova_operacao == 'n':
+                            break
+                        else:
+                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+                    
+                    if nova_operacao == 'n':
+                        break
+
+            case "5":
+                listar_animal()
+
+            case "6":
+                print("Voltando ao menu inicial...")
+                sleep(2)
+                return
+
+            case "7":
+                print("Saindo da plataforma... Até mais! :)")
+                exit()
+
+            case _:
+                print("Opção inválida! Tente novamente!")
+
+
+
 
 if __name__ == "__main__":
     main_animal()

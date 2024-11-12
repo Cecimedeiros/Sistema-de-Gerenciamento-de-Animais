@@ -97,18 +97,6 @@
    },
    {
       "nome": "o",
-      "endereco": "k",
-      "porte_animal": "p",
-      "contato": "019021"
-   },
-   {
-      "nome": "o",
-      "endereco": "j",
-      "porte_animal": "k",
-      "contato": "k"
-   },
-   {
-      "nome": "o",
       "endereco": "o",
       "porte_animal": "k",
       "contato": "1"
@@ -116,6 +104,12 @@
    {
       "nome": "Garagino",
       "endereco": "Casa forte",
+      "porte_animal": "pequeno",
+      "contato": "81988875554"
+   },
+   {
+      "nome": "abrigo pai",
+      "endereco": "Casa Forte",
       "porte_animal": "pequeno",
       "contato": "81988875554"
    }
