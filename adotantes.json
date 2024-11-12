@@ -9,6 +9,32 @@
       "preferencia_animal": "2"
    },
    {
+      "nome": "hugo",
+      "idade": "92",
+      "bairro": "Casa Forte",
+      "contato": "2389287",
+      "preferencia_animal": "Médio Porte",
+      "endereço": "1",
+      "porte": "2"
+   },
+   {
+      "nome": "Ana",
+      "idade": "92",
+      "bairro": "Casa Forte",
+      "contato": "2389287",
+      "preferencia_animal": "Pequeno",
+      "endereço": "1",
+      "porte": "2"
+   },
+   {
+      "nome": "Catarina",
+      "idade": "21",
+      "bairro": "Boa Viagem",
+      "contato": "81999907062",
+      "preferencia_porte": "1",
+      "preferencia_especie": "1"
+   },
+   {
       "nome": "Sandra",
       "idade": "44",
       "bairro": "Várzea",
@@ -31,13 +57,5 @@
       "contato": "8198446",
       "preferencia_porte": "2",
       "preferencia_especie": "1"
-   },
-   {
-      "nome": "Hugo",
-      "idade": "51",
-      "bairro": "Boa Viagem",
-      "contato": "818888",
-      "preferencia_porte": "3",
-      "preferencia_especie": "2"
    }
 ]

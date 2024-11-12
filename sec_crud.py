@@ -2,9 +2,7 @@ import json
 import os
 from time import sleep
 
-
 caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'json2.json')
-
 
 def carregar_voluntario():
     if not os.path.exists(caminho_arquivocrud2):
@@ -213,15 +211,16 @@ def voluntario_cadastrar ():
 
 def main_voluntario():  
                     while True:
-                        opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n2 - Visualizar informações de um voluntário \n3 - Atualizar informações sobre um voluntário \n4 - Excluir informações sobre um voluntário \n5 - Listar os voluntários existentes \n6 - Voltar ao menu Inicial \n")
+                        opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Visualizar informações de um voluntário \n2 - Atualizar informações sobre um voluntário \n3 - Excluir informações sobre um voluntário \n4 - Listar os voluntários existentes \n5 - Voltar ao menu Inicial \n6- Sair da plataforma \n")
                         match (opcao):
                                                         
-                            case "2":
+                            case "1":
                                 while True:
                                     print("\n->>> BUSCA DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("\nInforme o CPF do voluntário a ser procurado: ")
                                     buscar_voluntario(cpf)
-                                
+                                    if not continuar_operacao ("Buscar mais um voluntário"):
+                                        return
                                     while True:                          
                                         try:
                                             maisum = input("Deseja buscar mais um voluntário (s/n)? ").strip().lower()
@@ -237,7 +236,7 @@ def main_voluntario():
                                         
                                         except Exception as e:
                                             print(f"Erro inesperado: {e}. Tente novamente.")                      
-                            case "3":
+                            case "2":
                                 while True:
                                     print("\n->>> ATUALIZAÇÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("Informe o CPF do voluntário que a ser atualizado: ")
@@ -266,22 +265,10 @@ def main_voluntario():
                                                 print("Por favor, digite apenas números para o novo horário.") 
                                                 
                                         atualizar_voluntario(cpf, novo_nome, novo_ende, novo_contato, novo_horario)   
-                                        while True:                          
-                                            try:
-                                                maisum = input("Deseja atualizar mais um voluntário (s/n)? ").strip().lower()
-                                                
-                                                if maisum == 's':
-                                                    print(" ")
-                                                    break  
-                                                elif maisum == 'n':
-                                                    print("Voltando para o menu secundário...")
-                                                    main_voluntario () 
-                                                else:
-                                                    print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                            
-                                            except Exception as e:
-                                                print(f"Erro inesperado: {e}. Tente novamente.")
-                            case "4":
+                                        if not continuar_operacao ("Excluir mais um voluntário"):
+                                            return
+                                        
+                            case "3":
                                 while True:
                                     print("\n->>> EXCLUSÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("Digite o CPF do voluntário que você deseja excluir: ")
@@ -302,22 +289,45 @@ def main_voluntario():
                                         
                                         except Exception as e:
                                             print(f"Erro inesperado: {e}. Tente novamente.")                 
-                            case "5":
+                            case "4":
                                     print("\n->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     listar_voluntario()
-                            case "6":
+                            case "5":
                                 print("Voltando ao menu inicial...")
-                                sleep (3)
+                                sleep (2)
                                 break
+                            case "6":
+                                print ("Saindo da plataforma...")
+                                exit()
                             case _:
                                 print("Opção inválida! Tente novamente.")
+def solicitar_numerico(mensagem):
+    while True:
+        try:
+            valor = input(mensagem)
+            int(valor)  # Valida se é numérico
+            return valor
+        except ValueError:
+            print("Por favor, digite apenas números.")
 
-def main_animal():                
-        #elif op == '2': 
+# Função auxiliar para perguntar se o usuário deseja continuar a operação
+def continuar_operacao(operacao):
+    while True:
+        resposta = input(f"Deseja {operacao} (s/n)? ").strip().lower()
+        if resposta == 's':
+            return True
+        elif resposta == 'n':
+            print("Voltando para o menu anterior...")
+            sleep(2)
+            return False
+        else:
+            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
+
+
+def main_animal():                 
             while True:
-                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n \n->>> ATENÇÃO: Antes de cadastrar um animal, verifique nossos abrigos disponíveis em 'Voltar ao Menu Secundário' > 'Voltar ao Menu Inicial' > 'Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos' > 'Listar Abrigos'<<<- \n \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu Inicial \n Opção: ")
-                
-
+                opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n \n->>> ATENÇÃO: Antes de cadastrar um animal, verifique nossos abrigos disponíveis em 'Voltar ao Menu Secundário' > 'Voltar ao Menu Inicial' > 'Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos' > 'Listar Abrigos'<<<- \n \n1 - Cadastrar um animal \n2 - Visualizar informações de um animal \n3 - Atualizar informações sobre um animal \n4 - Excluir informações sobre um animal \n5 - Listar os animais existentes \n6 - Voltar ao menu Inicial \n7 - Sair da plataforma \nOpção: ")
+               
                 match opcao:
                     case "1":
                         while True:
@@ -337,46 +347,16 @@ def main_animal():
                                     print(" Por favor, digite apenas uma!")
                             cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal)
                             
-                            
-                            while True:                          
-                                try:
-                                    maisum = input("Deseja cadastrar mais um animal (s/n)? ").strip().lower()
-                                    
-                                    if maisum == 's':
-                                        print(" ")
-                                        break  
-                                    elif maisum == 'n':
-                                        print("Voltando para o menu secundário...")
-                                        main_animal () 
-                                    else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                
-                                except Exception as e:
-                                    print(f"Erro inesperado: {e}. Tente novamente.")
-                                
-                                
+                            if not continuar_operacao("Cadastrar mais um animal"):
+                                return           
                     case "2":
                         while True:
                             print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\nInforme o nome do animal a ser procurado: ")
                             buscar_animal(nome)
                             
-                            while True:                          
-                                try:
-                                    maisum = input("Deseja buscar mais um animal (s/n)? ").strip().lower()
-                                    
-                                    if maisum == 's':
-                                        print(" ")
-                                        break  
-                                    elif maisum == 'n':
-                                        print("Voltando para o menu secundário...")
-                                        main_animal () 
-                                    else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                
-                                except Exception as e:
-                                    print(f"Erro inesperado: {e}. Tente novamente.")
-                                    
+                            if not continuar_operacao("buscar mais um animal"):
+                                return              
                     case "3":
                         while True:
                             print("\n->>> ATUALIZAÇÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
@@ -406,50 +386,28 @@ def main_animal():
                                             continue   
                                 atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal)
                             
-                            while True:                          
-                                try:
-                                    maisum = input("Deseja atualizar informações de mais um animal (s/n)? ").strip().lower()
-                                    
-                                    if maisum == 's':
-                                        print(" ")
-                                        break  
-                                    elif maisum == 'n':
-                                        print("Voltando para o menu secundário...")
-                                        main_animal () 
-                                    else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                
-                                except Exception as e:
-                                    print(f"Erro inesperado: {e}. Tente novamente.")
-                            
+                            if not continuar_operacao("atualizar mais um animal"):
+                                return
                     case "4":
                         while True:
                             print("\n->>> EXCLUSÃO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("Qual o nome do animal que você deseja excluir? ")
                             excluir_animal(nome)
                             
-                            while True:                          
-                                try:
-                                    maisum = input("Deseja excluir informações de mais um animal (s/n)? ").strip().lower()
-                                    
-                                    if maisum == 's':
-                                        print(" ")
-                                        break  
-                                    elif maisum == 'n':
-                                        print("Voltando para o menu secundário...")
-                                        main_animal () 
-                                    else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                
-                                except Exception as e:
-                                    print(f"Erro inesperado: {e}. Tente novamente.")
-                                    
+                            if not continuar_operacao("excluir mais um animal"):
+                                return
                     case "5":
                         print("\n->>> LISTA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                         listar_animal()
+                        if not continuar_operacao("listar novamente"):
+                            return
                     case "6":
                         print("Voltando ao menu inicial...")
+                        sleep (2)
                         break
+                    case "7":
+                        print ("Saindo da plataforma... Até mais!")
+                        exit ()
                     case _:
                         print("Opção inválida! Tente novamente!")   
 
