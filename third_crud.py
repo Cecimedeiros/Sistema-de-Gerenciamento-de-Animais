@@ -116,8 +116,7 @@ def main3():
                         print(f"{i}. {bairro}")
                     bairro_escolhido = int(input("Escolha o número do bairro desejada: "))
                     if bairro_escolhido <= 1 or bairro_escolhido > len(bairros):
-                        print('\n Escolha uma da opções do menu')
-                    bairro = bairros[bairro_escolhido - 1]
+                        bairro = bairros[bairro_escolhido - 1]
                     
                     contato = input("Informe o contato do adotante: ")
 

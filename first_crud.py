@@ -208,8 +208,8 @@ def main1 ():
                     print(f"Erro inesperado: {e}. Tente novamente.") 
         elif op==5:
             main3 ()
-        elif op==6:  
-            fim()
+        elif op==6:
+            fim()  
             break
         else: 
             print (" Opção inválida, tente novamente! ")
