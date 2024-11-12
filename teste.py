@@ -1,3 +1,4 @@
+"""
 from first_crud import main1, carregar_abrigo, atualizar_abrigo, buscar_abrigos, excluir_abrigo, cadastrar_abrigo, listar_abrigo, fim
 from sec_crud import carregar_animal, atualizar_animal, buscar_animal, excluir_animal, cadastrar_animal, main_animal, carregar_voluntario, buscar_voluntario, cadastrar_voluntario, excluir_voluntario, listar_animal, listar_voluntario, atualizar_voluntario, main_voluntario
 from third_crud import carregar_adotantes, cadastrar_adotante, atualizar_adotante, buscar_adotante, excluir_adotante, listar_adotantes, main3
@@ -60,3 +61,4 @@ def menu():
 
 
 main1 ()
+"""
