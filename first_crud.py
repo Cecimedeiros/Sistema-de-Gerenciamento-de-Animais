@@ -75,6 +75,9 @@ def buscar_abrigos(nome):
     if not abrigo_encontrado:
         print (" Nenhum abrigo encontrado!")
 
+def fim():
+    return
+
 def main1 ():
     while True: 
         print ("\n  <<-------- PLATAFORMA \"EM BUSCA DE UM LAR\" -------->>")
@@ -208,16 +211,12 @@ def main1 ():
                     print(f"Erro inesperado: {e}. Tente novamente.") 
         elif op==5:
             main3 ()
-        elif op==6:
-            fim()  
+        elif op == 6:
+            print(" Saindo da plataforma...")
+            sleep(2) 
             break
-        else: 
-            print (" Opção inválida, tente novamente! ")
-            main1()
-def fim ():
-    print (" Saindo da plataforma...")
-    
+        else:
+            print(" Opção inválida, tente novamente! ")
+
 if __name__ == "__main__":
-    main1 ()
-main1 ()
-fim ()
+    main1()
