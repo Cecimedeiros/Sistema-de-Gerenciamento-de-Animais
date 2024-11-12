@@ -17,14 +17,15 @@ def carregar_adotantes():
             return []
         return json.load(arquivojson_aberto)
 
-def cadastrar_adotante(nome, idade, bairro, contato, preferencia_animal):
+def cadastrar_adotante(nome, idade, bairro, contato, preferencia_porte, preferencia_especie):
     adotantes = carregar_adotantes()
     adotantes.append({
         'nome': nome,
         'idade': idade,
         'bairro': bairro,
         'contato': contato,
-        'preferencia_animal': preferencia_animal
+        'preferencia_porte': preferencia_porte,
+        'preferencia_especie':preferencia_especie
     })
     with open(caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto:
         json.dump(adotantes, arquivojson_aberto, indent=3, ensure_ascii=False)
@@ -90,14 +91,19 @@ def verificar_preferencia_adotante(adotantes, animais):
         return  
     print(f"Verificando preferências de adoção para {adotante_encontrado['nome']}...")
     
-    preferencia = adotante_encontrado['preferencia_animal'].strip().lower()
+    preferencia_porte = adotante_encontrado['preferencia_porte']
+    preferencia_especie = adotante_encontrado['preferencia_especie']
     
     for animal in animais:
-        porte_animal = animal['porte'].strip().lower() if 'porte' in animal else ""
+        # Garantir que o porte do animal também seja uma string para a comparação
+        porte_animal = animal.get('porte' , '').strip()
+        especie_animal = animal.get('especie' , '').strip()
         
-        
-        if preferencia == porte_animal:
+        # Comparar as preferências do adotante com as características do animal 
+        if preferencia_porte == porte_animal or preferencia_especie == especie_animal:
             print(f"O animal {animal['nome']} atende às suas preferências!")
+        
+
 
 def main3():
     while True:
@@ -121,26 +127,41 @@ def main3():
                     contato = input("Informe o contato do adotante: ")
 
                     print("\nPreferências de animais:")
-                    preferencias = ["Grande Porte", "Médio Porte", 'Pequeno Porte']
+                    preferencias_porte = ["1", "2", "3"]
+                    preferencias_especie = ["1", "2", "3"]
 
                     while True:
-                        for i, preferencia in enumerate(preferencias, 1):
+                        for i, preferencia in enumerate(preferencias_porte, 1):
                             print(f"{i}. {preferencia}")
 
                         try:
-                            preferencia_escolhida = int(input("Escolha o número da preferência desejada: "))
+                            preferencia_escolhida_porte = int(input("Escolha o número da preferência desejada \n 1 - Pequeno porte \n 2 Médio porte \n 3 - Grande porte : "))
                             
-                            if 1 <= preferencia_escolhida <= 3:
-                                preferencia_animal = preferencias[preferencia_escolhida - 1]
+                            if 1 <= preferencia_escolhida_porte <= 3:
+                                preferencia_porte = preferencias_porte[preferencia_escolhida_porte - 1]
                                 break 
                             else:
                                 print('Escolha uma opção do menu.')
                                 
                         except ValueError:
                             print('Entrada inválida. Por favor, insira um número.')
+                    while True:
+                        for i, especie in enumerate(preferencias_especie, 1):
+                            print(f"{i}. {especie}")
+
+                        try:
+                            preferencia_escolhida_especie = int(input("Escolha o número da preferência de espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : "))
+                            
+                            if 1 <= preferencia_escolhida_especie <= 3:
+                                preferencia_especie = preferencias_especie[preferencia_escolhida_especie - 1]
+                                break 
+                            else:
+                                print('Escolha uma opção do menu.')
+                        except ValueError:
+                            print('Entrada inválida. Por favor, insira um número.')
 
                     
-                    cadastrar_adotante(nome, idade, bairro, contato, preferencia_animal)
+                    cadastrar_adotante(nome, idade, bairro, contato, preferencia_especie, preferencia_porte )
 
                     maisum = input("Deseja cadastrar mais um adotante? (s/n): ").strip().lower()
                     if maisum == 'n':

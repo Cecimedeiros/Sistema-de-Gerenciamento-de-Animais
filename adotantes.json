@@ -25,5 +25,37 @@
       "preferencia_animal": "Pequeno",
       "endereço": "1",
       "porte": "2"
+   },
+   {
+      "nome": "Catarina",
+      "idade": "21",
+      "bairro": "Boa Viagem",
+      "contato": "81999907062",
+      "preferencia_porte": "1",
+      "preferencia_especie": "1"
+   },
+   {
+      "nome": "Sandra",
+      "idade": "44",
+      "bairro": "Várzea",
+      "contato": "88888888",
+      "preferencia_porte": "2",
+      "preferencia_especie": "2"
+   },
+   {
+      "nome": "Luis",
+      "idade": "24",
+      "bairro": "Várzea",
+      "contato": "77777",
+      "preferencia_porte": "3",
+      "preferencia_especie": "3"
+   },
+   {
+      "nome": "Gabriel",
+      "idade": "22",
+      "bairro": "Várzea",
+      "contato": "8198446",
+      "preferencia_porte": "2",
+      "preferencia_especie": "1"
    }
 ]

@@ -323,9 +323,9 @@ def main_animal():
                         while True:
                             print("\n->>> CADASTRAMENTO DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\nInforme o nome do animal a ser cadastrado: ")
-                            especie = input("\nInforme a espécie do animal: ")
+                            especie = input("Escolha o número da preferência de espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
                             idade = input("\nInforme a idade do animal (em anos): ")
-                            porte = input("\nInforme o porte do animal (pequeno, médio e grande): ")
+                            porte = input("Escolha o número da preferência desejada \n 1 - Pequeno porte \n 2 Médio porte \n 3 - Grande porte : ")
                             raca = input("\nInforme a raça do animal: ")
                             abrigo = input ("\nInforme o nome do abrigo em que o animal está instalado: ")
                             historico_medico = input("\nInsira aqui o histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
