@@ -79,14 +79,23 @@ def main1 ():
     while True: 
         print ("\n  <<-------- PLATAFORMA \"EM BUSCA DE UM LAR\" -------->>")
         print ("\n Olá, somos uma plataforma de gerenciamento de animais para adoção. \n Conectamos você com abrigos, animais e também recebemos voluntários para nos ajudar nessa causa especial! \n Vamos explorar a plataforma?! " )
-        op= int(input ("\n Escolha uma opção abaixo: \n 1 - Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos \n 2 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os animais \n 3 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os voluntários \n 4 - Quero me tornar voluntário(a) da plataforma \n 5 - Quero adotar um animal  \n 6 - Sair da plataforma \n O que deseja fazer no momento? "))
+        while True:
+                try:
+                    op= int(input ("\n Escolha uma opção abaixo: \n 1 - Sou voluntário(a) da plataforma e quero gerenciar informações dos abrigos \n 2 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os animais \n 3 - Sou voluntário(a) da plataforma e quero gerenciar informações sobre os voluntários \n 4 - Quero me tornar voluntário(a) da plataforma \n 5 - Quero adotar um animal  \n 6 - Sair da plataforma \n O que deseja fazer no momento? "))
 
+                    if op not in range(1, 7):
+                        print("Opção inválida! Por favor, escolha uma opção entre 1 e 6.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print("Entrada inválida! Por favor, digite apenas números.")
         if op== 1: 
             while True:
                 opcao=input("\n Dentre as seguintes opções:  \n 1- Cadastrar um abrigo \n 2- Vizualizar informações do abrigo \n 3- Atualizar informações sobre o abrigo \n 4- Excluir informações sobre o abrigo \n 5- Listar os abrigos existentes \n 6- Voltar ao menu inicial \n O que você deseja fazer agora? ")
                 if opcao=="1":    
 
-                    print ("\n ->>> CADASTRAMENTO DE ABRIGOS PARA ANIMAIS <<<-")
+                    print ("\n ->>> CADASTRAMENTO DE ABRIGOS PARA ANIMAIS - EM BUSCA DE UM LAR <<<-")
                     print ("\n Para cadastrar um novo abrigo é preciso que responda as seguintes perguntas: ")
                     nome=input("\n Informe o nome do abrigo a ser cadastrado: ")
                     endereco= input ("\n O gerenciamento atende aos seguintes bairros: \n   Boa viagem -- Casa Forte -- Graças -- Jaqueira -- Torre -- Várzea \n Diante disso, informe a localização do abrigo: ")
@@ -100,12 +109,12 @@ def main1 ():
                     cadastrar_abrigo(nome, endereco, porte_animal, contato)
 
                 elif opcao == "2":
-                    print ("\n ->-> BUSCA DE ABRIGOS PARA ANIMAIS <-<-")
+                    print ("\n ->-> BUSCA DE ABRIGOS PARA ANIMAIS - EM BUSCA DE UM LAR <-<-")
                     nome=input("\n Informe o nome do abrigo a ser procurado: ")
                     buscar_abrigos(nome)
 
                 elif opcao == "3":
-                    print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ABRIGOS <<--")
+                    print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ABRIGOS - EM BUSCA DE UM LAR <<--")
                     nome_antigo= input (" Informe o nome do abrigo a ter suas informações atualizadas (o nome antigo): ").strip().lower()
                     abrigos= carregar_abrigo ()
                     abrigo_encontrado = any (abrigo['nome'].strip().lower()==nome_antigo for abrigo in abrigos)
@@ -125,11 +134,11 @@ def main1 ():
                         atualizar_abrigo(nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo_contato)
 
                 elif opcao == "4":
-                    print ("\n ------> EXCLUSÃO DE DADOS DOS ABRIGOS PARA ANIMAIS <------")
+                    print ("\n ------> EXCLUSÃO DE DADOS DOS ABRIGOS PARA ANIMAIS - EM BUSCA DE UM LAR <------")
                     nome = input(" Nome do abrigo a excluir: ")
                     excluir_abrigo(nome)
                 elif opcao == "5":
-                    print ("\n ------> LISTA DE DADOS DOS ABRIGOS PARA ANIMAIS <------")
+                    print ("\n ------> LISTA DE DADOS DOS ABRIGOS PARA ANIMAIS - EM BUSCA DE UM LAR <------")
                     listar_abrigo()
                 elif opcao == "6":
                     break  

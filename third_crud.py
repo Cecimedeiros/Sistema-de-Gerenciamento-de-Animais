@@ -63,17 +63,15 @@ def atualizar_adotante(nome_velho, nome_novo, bairro_escolhido_novo, porte_novo_
 
     adotantes = carregar_adotantes()
 
-    # Procura o adotante com o nome velho
+
     for adotante in adotantes:
         if adotante['nome'] == nome_velho:
-            # Atualiza os dados do adotante encontrado
             adotante['nome'] = nome_novo
             adotante['bairro'] = bairro_escolhido_novo
-            adotante['preferencia_porte'] = porte_novo_escolhido  # Atualizando preferências corretamente
+            adotante['preferencia_porte'] = porte_novo_escolhido  
             adotante['contato'] = novo_contato_adotante
             break
 
-    # Salva as alterações de volta no arquivo
     with open(caminho_arquivo, 'w', encoding='utf-8') as arquivojson_aberto:
         json.dump(adotantes, arquivojson_aberto, indent=3, ensure_ascii=False)
 
@@ -109,7 +107,7 @@ def obter_preferencia_porte(numero):
     return porte_map.get(numero.strip(), "")
 
 def verificar_preferencia_adotante(adotantes, animais):
-    nome_adotante = input("Informe o nome do adotante para verificar as preferências: ").strip().lower()
+    nome_adotante = input("\nInforme o nome do adotante para verificar as preferências: ").strip().lower()
     adotante_encontrado = None
 
     for adotante in adotantes:
@@ -127,28 +125,27 @@ def verificar_preferencia_adotante(adotantes, animais):
     preferencia_porte = adotante_encontrado['preferencia_porte']
 
     for animal in animais:
-        especie_animal = str(animal['especie'])  # Convertendo para string para comparação
+        especie_animal = str(animal['especie']) 
         porte_animal = str(animal['porte'])
 
         if preferencia_porte == porte_animal and preferencia_especie == especie_animal:
             print(f"\nEncontrado animal que atende às preferências de {adotante_encontrado['nome']}:")
             print(f"Nome: {animal['nome']}, Espécie: {obter_preferencia_especie(especie_animal)}, Porte: {obter_preferencia_porte(porte_animal)}")
-            print("Este animal pode ser uma boa opção para adoção!")
+            print("Este animal pode ser uma boa opção para adoção! ;) \n Ademais, caso queira saber mais sobre o animal, vá até o menu secundário e escolha \"Listar animais disponíveis para adoção")
             return animal  
 
-    print("Nenhum animal encontrado que atenda às preferências.")
-    return None
+    print("Nenhum animal encontrado que atenda às preferências. Se quiser saber mais sobre outros animais, vá até o menu secundário e escolha \"Listar animais disponíveis para adoção\"")
 
 def main3():
 
     while True:
 
-        op = int(input("\nEscolha uma das ações:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Match \n7 - Voltar para o menu inicial \n8 - Sair da plataforma\nO que deseja fazer? "))
+        op = int(input("\nEscolha uma das ações:\n1 - Cadastrar adotante\n2 - Listar adotantes\n3 - Buscar adotante\n4 - Excluir adotante \n5 - Atualizar adotante\n6 - Match \n7 - Listar animais disponíveis para adoção \n8 - Voltar para o menu inicial \n9 - Sair da plataforma\nO que deseja fazer? "))
 
         match op:
             case 1:
                 while True:
-                    print("---<> CADASTRO DE ADOTANTES NA PLATAFORMA <>---")
+                    print("\n---<> CADASTRO DE ADOTANTES NA PLATAFORMA - EM BUSCA DE UM LAR <>---")
                     nome = input("Informe o nome do adotante: ")
 
                   
@@ -222,98 +219,91 @@ def main3():
                         break
 
             case 2:
-                print ("--->> LISTA DE ADOTANTES CADASTRADOS NA PLATAFORMA <<---")
+                print ("\n--->> LISTA DE ADOTANTES CADASTRADOS NA PLATAFORMA - EM BUSCA DE UM LAR <<---")
                 listar_adotantes()
 
             case 3:
-                print ("->-> BUSCAR ADOTANTES NA PLATAFORMA <-<-")   
+                print ("\n->-> BUSCAR ADOTANTES NA PLATAFORMA - EM BUSCA DE UM LAR <-<-")   
                 nome = input("Informe o nome do adotante para buscar: ")
                 buscar_adotante(nome)
 
             case 4:
-                print ("---> EXCLUSÃO DE DADOS DOS ADOTANTES <---")   
+                print ("\n---> EXCLUSÃO DE DADOS DOS ADOTANTES - EM BUSCA DE UM LAR <---")   
                 nome = input("Informe o nome do adotante para excluir: ")
                 excluir_adotante(nome)
 
             case 5:
                     
-                    print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ADOTANTE <<--")
-                    nome_velho= input ("Informe o nome do adotante que deseja atualizar: ").strip().lower()
-                    print("\n -->> ATUALIZAÇÃO DE DADOS DOS ADOTANTES <<--")
-                    nome_velho = input("Informe o nome do adotante que deseja atualizar: ").strip().lower()
-                    nome_novo = input("Informe o novo nome: ").strip().lower()
-                    idade = input("Informe a idade do adotante: ")
+                print ("\n -->>  ATUALIZAÇÃO DE DADOS DOS ADOTANTE - EM BUSCA DE UM LAR <<--")
+                nome_velho= input ("Informe o nome do adotante que deseja atualizar: ").strip().lower()
+                print("\n -->> ATUALIZAÇÃO DE DADOS DOS ADOTANTES <<--")
+                nome_velho = input("Informe o nome do adotante que deseja atualizar: ").strip().lower()
+                nome_novo = input("Informe o novo nome: ").strip().lower()
+                idade = input("Informe a idade do adotante: ")
                     
-                    print("\nBairros disponíveis em Recife:")
-                    bairros = ["Boa Viagem", "Casa Forte", "Graças", "Jaqueira", "Torre", "Várzea"]
-                    for i, bairro in enumerate(bairros, 1):
-                        print(f"{i}. {bairro}")
+                print("\nBairros disponíveis em Recife:")
+                bairros = ["Boa Viagem", "Casa Forte", "Graças", "Jaqueira", "Torre", "Várzea"]
+                for i, bairro in enumerate(bairros, 1):
+                    print(f"{i}. {bairro}")
 
-                    bairro_escolhido_novo = int(input("Escolha o número do bairro desejado: "))
+                bairro_escolhido_novo = int(input("Escolha o número do bairro desejado: "))
 
-                    if 1 <= bairro_escolhido_novo <= len(bairros):  
-                        bairro = bairros[bairro_escolhido_novo - 1]
-                        print(f"Bairro escolhido: {bairro}")
-                    else:
-                        print("Número inválido. Por favor, escolha um número válido de bairro.")
+                if 1 <= bairro_escolhido_novo <= len(bairros):  
+                    bairro = bairros[bairro_escolhido_novo - 1]
+                    print(f"Bairro escolhido: {bairro}")
+                else:
+                    print("Número inválido. Por favor, escolha um número válido de bairro.")
 
-                    contato_novo = input("Informe o contato do adotante: ")
+                contato_novo = input("Informe o contato do adotante: ")
 
-
-
-                    print("\nPreferências de animais (porte):")
-                    preferencias_porte = ["Pequeno porte", "Médio porte", "Grande porte"]
-
-                    
-                    for i, preferencia in enumerate(preferencias_porte, 1):
-                        print(f"{i}. {preferencia}")
+                print("\nPreferências de animais (porte):")
+                preferencias_porte = ["Pequeno porte", "Médio porte", "Grande porte"]
+ 
+                for i, preferencia in enumerate(preferencias_porte, 1):
+                    print(f"{i}. {preferencia}")
 
                     
-                    while True:
-                        try:
-                            porte_novo_escolhido = str(input("Escolha o número da preferência desejada (1-3): "))
-                            if 1 <= porte_novo_escolhido and porte_novo_escolhido <= len(preferencias_porte):
-                                preferencia_porte = preferencias_porte[porte_novo_escolhido - 1]
-                                break
-                            else:
-                                print("Escolha uma opção válida entre 1 e 3.")
-                        except ValueError:
-                            print("Entrada inválida. Por favor, insira um número.")
+                while True:
+                    try:
+                        porte_novo_escolhido = str(input("Escolha o número da preferência desejada (1-3): "))
+                        if 1 <= porte_novo_escolhido and porte_novo_escolhido <= len(preferencias_porte):
+                            preferencia_porte = preferencias_porte[porte_novo_escolhido - 1]
+                            break
+                        else:
+                            print("Escolha uma opção válida entre 1 e 3.")
+                    except ValueError:
+                        print("Entrada inválida. Por favor, insira um número.")
+  
+                print("\nPreferências de animais (espécie):")
+                preferencias_especie = ["Cachorro", "Gato", "Outro"]
+                for i, especie in enumerate(preferencias_especie, 1):
+                    print(f"{i}. {especie}")
 
-            
-                       
-                    
-                    print("\nPreferências de animais (espécie):")
-                    preferencias_especie = ["Cachorro", "Gato", "Outro"]
-                    for i, especie in enumerate(preferencias_especie, 1):
-                        print(f"{i}. {especie}")
-
-
-                    preferencia_escolhida_especie = str(input("Escolha o número da preferência de espécie (1-3): "))
-                    if 1 <= preferencia_escolhida_especie <= 3:
-                        preferencia_especie = preferencias_especie[preferencia_escolhida_especie - 1]
+                preferencia_escolhida_especie = str(input("Escolha o número da preferência de espécie (1-3): "))
+                if 1 <= preferencia_escolhida_especie <= 3:
+                    preferencia_especie = preferencias_especie[preferencia_escolhida_especie - 1]
       
-                    else:
-                        print("Escolha uma opção válida entre 1 e 3.")
-    
+                else:
+                    print("Escolha uma opção válida entre 1 e 3.")
 
-                    
-                    atualizar_adotante(nome_velho, nome_novo, bairro_escolhido_novo, preferencia_porte, contato_novo)
+                
+                atualizar_adotante(nome_velho, nome_novo, bairro_escolhido_novo, preferencia_porte, contato_novo)
 
 
-                    print("Dados do adotante atualizados com sucesso!")       
+                print("Dados do adotante atualizados com sucesso!")       
 
             case 6:
                 
                 adotantes = carregar_adotantes()  
                 animais = carregar_animal()  
                 verificar_preferencia_adotante(adotantes, animais) 
-
             case 7:
-                           
-                    print(" Voltando para o menu inicial...")
-                    break
-            case 8:
+                print("\n->>> LISTA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")   
+                listar_animal()
+            case 8:              
+                print("\nVoltando para o menu inicial...")
+                break
+            case 9:
                 print("Saindo do sistema...")
                 exit()
 

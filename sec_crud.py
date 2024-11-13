@@ -292,7 +292,7 @@ def main_animal():
         match opcao:
             case "1":
                 
-                    print ("\n ------> CADASTRO DE DADOS DE ANIMAIS <------")
+                    print ("\n ------> CADASTRO DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <------")
                     nome = input("\nInforme o nome do animal a ser cadastrado: ")
                     while True:
                         especie = input("\nEscolha o número de acordo com a espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
@@ -338,16 +338,15 @@ def main_animal():
                     
                     cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal, sexo)
                     
-
             case "2":
                 
-                    print("\n->>> BUSCA DE DADOS DE ANIMAIS <<<-")
+                    print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                     nome = input("\nInforme o nome do animal a ser procurado: ")
                     buscar_animal(nome)
                 
             case "3":
                     animais = carregar_animal()
-                    print ("\n ------> ATUALIZAÇÃO DE DADOS DOS ANIMAIS <------")
+                    print ("\n ------> ATUALIZAÇÃO DE DADOS DOS ANIMAIS - EM BUSCA DE UM LAR <------")
                     nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
                     animal_encontrado = any(animal['nome'].strip().lower() == nome_antigo for animal in animais)
                     if not animal_encontrado:
@@ -385,15 +384,15 @@ def main_animal():
                         atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo, nova_raca)
                     
             case "4":           
-                    print ("\n ------> EXCLUSÃO DE DADOS DOS ANIMAIS <------")
+                    print ("\n ------> EXCLUSÃO DE DADOS DOS ANIMAIS - EM BUSCA DE UM LAR <------")
                     nome = input("Qual o nome do animal que você deseja excluir? ")
                     excluir_animal(nome)
             case "5":
-                print("->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
+                print("\n->>> LISTA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
                 listar_animal()
 
             case "6":
-                print("Voltando ao menu inicial...")
+                print("\nVoltando ao menu inicial...")
                 sleep(2)
                 return
 
