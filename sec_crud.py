@@ -121,11 +121,11 @@ def listar_animal():
         caracteristica_animal = animal.get('caracteristica_animal', 'Não especificado')
         sexo = animal.get('sexo', 'Não especificado')
         
-        print(f"Nome: {nome}, \nEspécie: {especie}, \nIdade: {idade}, \nPorte: {porte}, \nRaça: {raca}, \nHistórico Médico: {historico_medico}, \nAbrigo: {abrigo}, \nCaracterísticas: {caracteristica_animal}, \nSexo: {sexo}")
+        print(f"Nome: {nome}, \nEspécie (1 - Cachorro 2 - Gato 3 - Outro): {especie}, \nIdade (anos): {idade}, \nPorte (1 - Pequeno porte 2 - Médio porte 3 - Grande porte): {porte}, \nRaça: {raca}, \nHistórico Médico: {historico_medico}, \nAbrigo: {abrigo}, \nCaracterísticas: {caracteristica_animal}, \nSexo: {sexo}")
         print()  
 
 
-def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo):
+def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo, nova_raca):
     animais = carregar_animal()
     nome_antigo = nome_antigo.strip().lower()
     animal_encontrado= False
@@ -134,6 +134,7 @@ def atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono
             animal['nome'] = novo_nome
             animal['especie'] = nova_especie
             animal['idade'] = nova_idade
+            animal['raca'] =  nova_raca
             animal['dono'] = novo_dono
             animal['historico_medico'] = historico_medico
             animal['abrigo'] = novo_abrigo
@@ -171,14 +172,14 @@ def buscar_animal(nome):
         if animal['nome'].strip().lower() == nome:
             adotado = "Sim" if animal.get('dono') else "Não"
             dono = animal.get('dono', 'N/A')  
-            print(f"Nome: {animal['nome']}, \nEspécie: {animal['especie']}, \nIdade: {animal['idade']}, \nPorte: {animal['porte']}, \nRaça: {animal['raca']}, \nHistórico Médico: {animal['historico_medico']}, \nAdotado: {adotado}, \nNome do Dono: {dono}")
+            print(f"Nome: {animal['nome']}, \nEspécie (1 - Cachorro 2 - Gato 3 - Outro ): {animal['especie']}, \nIdade (anos): {animal['idade']}, \nPorte (1 - Pequeno porte 2 - Médio porte 3 - Grande porte): {animal['porte']}, \nRaça: {animal['raca']}, \nHistórico Médico: {animal['historico_medico']}, \nAdotado: {adotado}, \nNome do Dono: {dono}")
             encontrado = True
             break
     if not encontrado:
         print("Nenhum animal encontrado!")
 
 def voluntario_cadastrar ():
-                        while True:
+                        
                             print("\n->>> CADASTRAMENTO DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                             nome = input("\n Informe o nome completo do voluntário a ser cadastrado: ")
                             while True:
@@ -207,51 +208,17 @@ def voluntario_cadastrar ():
                                     print("Por favor, digite apenas números para as horas.")
                                 
                             cadastrar_voluntario(nome, cpf, endereco, contato, horas)
-                            
-                            while True:                          
-                                try:
-                                    maisum = input("Deseja cadastrar mais um voluntário (s/n)? ").strip().lower()
-                                    
-                                    if maisum == 's':
-                                        print(" ")
-                                        break  
-                                    elif maisum == 'n':
-                                        print("Voltando para o menu secundário...")
-                                        main_voluntario () 
-                                    else:
-                                        print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                
-                                except Exception as e:
-                                    print(f"Erro inesperado: {e}. Tente novamente.")
 
 def main_voluntario():  
                     while True:
-                        opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Visualizar informações de um voluntário \n2 - Atualizar informações sobre um voluntário \n3 - Excluir informações sobre um voluntário \n4 - Listar os voluntários existentes \n5 - Voltar ao menu Inicial \n6- Sair da plataforma \n")
+                        opcao = input("\nDentre as opções abaixo, o que você deseja fazer? \n1 - Visualizar informações de um voluntário \n2 - Atualizar informações sobre um voluntário \n3 - Excluir informações sobre um voluntário \n4 - Listar os voluntários existentes \n5 - Voltar ao menu Inicial \n6 - Sair da plataforma \n")
                         match (opcao):
                                                         
                             case "1":
-                                while True:
                                     print("\n->>> BUSCA DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("\nInforme o CPF do voluntário a ser procurado: ")
-                                    buscar_voluntario(cpf)
-                                    
-                                    while True:                          
-                                        try:
-                                            maisum = input("Deseja buscar mais um voluntário (s/n)? ").strip().lower()
-                                            
-                                            if maisum == 's':
-                                                print(" ")
-                                                break  
-                                            elif maisum == 'n':
-                                                print("Voltando para o menu secundário...")
-                                                main_voluntario () 
-                                            else:
-                                                print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                        
-                                        except Exception as e:
-                                            print(f"Erro inesperado: {e}. Tente novamente.")                      
+                                    buscar_voluntario(cpf)                             
                             case "2":
-                                while True:
                                     print("\n->>> ATUALIZAÇÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("Informe o CPF do voluntário que a ser atualizado: ")
                                     voluntarios=carregar_voluntario ()
@@ -278,36 +245,15 @@ def main_voluntario():
                                             except ValueError:
                                                 print("Por favor, digite apenas números para o novo horário.") 
                                                 
-                                        atualizar_voluntario(cpf, novo_nome, novo_ende, novo_contato, novo_horario)   
-                                        if not continuar_operacao ("Deseja atualizar mais um voluntário"):
-                                            return
-                                        
+                                        atualizar_voluntario(cpf, novo_nome, novo_ende, novo_contato, novo_horario)               
                             case "3":
-                                while True:
+                                
                                     print("\n->>> EXCLUSÃO DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                                     cpf = input("Digite o CPF do voluntário que você deseja excluir: ")
-                                    excluir_voluntario(cpf)
-                                    
-                                    while True:                          
-                                        try:
-                                            maisum = input("Deseja excluir mais um voluntário (s/n)? ").strip().lower()
-                                            
-                                            if maisum == 's':
-                                                print(" ")
-                                                break  
-                                            elif maisum == 'n':
-                                                print("Voltando para o menu secundário...")
-                                                main_voluntario () 
-                                            else:
-                                                print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                                        
-                                        except Exception as e:
-                                            print(f"Erro inesperado: {e}. Tente novamente.")                 
+                                    excluir_voluntario(cpf)                      
                             case "4":
-
                                 print("\n->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
-                                listar_voluntario()
-                                
+                                listar_voluntario()     
                             case "5":
                                 print("Voltando ao menu inicial...")
                                 sleep (2)
@@ -317,7 +263,7 @@ def main_voluntario():
                                 exit()
                             case _:
                                 print("Opção inválida! Tente novamente.")
-def solicitar_numerico(mensagem):
+'''def solicitar_numerico(mensagem):
     while True:
         try:
             valor = input(mensagem)
@@ -337,15 +283,7 @@ def continuar_operacao(operacao):
             sleep(2)
             return False
         else:
-            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-
-
-
-
-
-
-
-
+            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")'''
 
 def main_animal():                 
     while True:
@@ -353,11 +291,26 @@ def main_animal():
        
         match opcao:
             case "1":
-                while True:
+                
+                    print ("\n ------> CADASTRO DE DADOS DE ANIMAIS <------")
                     nome = input("\nInforme o nome do animal a ser cadastrado: ")
-                    especie = input("\nEscolha o número de acordo com a espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
+                    while True:
+                        especie = input("\nEscolha o número de acordo com a espécie: \n1 - Cachorro \n2 - Gato \n3 - Outro : ")
+                   
+                        if especie.isdigit() and int(especie) in [1, 2, 3]:
+                            especie = str(especie)  
+                            break  
+                        else:
+                            print("Entrada inválida! Por favor, escolha um número entre 1, 2 ou 3.")                  
                     idade = input("\nInforme a idade do animal (em anos): ")
-                    porte = input("\nEscolha o número da preferência desejada \n1 - Pequeno porte \n2 - Médio porte \n3 - Grande porte : ")
+                    while True:
+                        porte = input("\nEscolha o número da preferência desejada \n1 - Pequeno porte \n2 - Médio porte \n3 - Grande porte : ")
+                    
+                        if porte.isdigit() and int(porte) in [1, 2, 3]:
+                            porte = str(porte)  
+                            break  
+                        else:
+                            print("Entrada inválida! Por favor, escolha um número entre 1, 2 ou 3.")                   
                     raca = input("\nInforme a raça do animal: ")
                     abrigo = input("\nInforme o nome do abrigo em que o animal está instalado: ")
                     
@@ -375,7 +328,7 @@ def main_animal():
                     print("\nDentre as características:")
                     print("1 - Companheiro\n2 - Bravo\n3 - Protetor\n4 - Quieto\n5 - Agitado\n6 - Preguiçoso\n7 - Animal de apoio emocional")
                     while True:
-                        caracteristica_animal = input("Escolha uma característica que mais combina com o animal: ")
+                        caracteristica_animal = input("Escolha e digite o número da característica que mais combina com o animal: ")
                         if caracteristica_animal in ['1', '2', '3', '4', '5', '6', '7']:
                             break
                         else:
@@ -385,44 +338,25 @@ def main_animal():
                     
                     cadastrar_animal(nome, especie, idade, porte, raca, historico_medico, abrigo, caracteristica_animal, sexo)
                     
-                    while True:
-                        nova_operacao = input("\nDeseja cadastrar mais um animal? (s/n): ").lower()
-                        if nova_operacao == 's' or nova_operacao == 'n':
-                            break
-                        else:
-                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                    
-                    if nova_operacao == 'n':
-                        break
 
             case "2":
-                while True:
-                    print("\n->>> BUSCA DE DADOS DE ANIMAIS - EM BUSCA DE UM LAR <<<-")
+                
+                    print("\n->>> BUSCA DE DADOS DE ANIMAIS <<<-")
                     nome = input("\nInforme o nome do animal a ser procurado: ")
                     buscar_animal(nome)
-                    
-                    while True:
-                        nova_operacao = input("\nDeseja buscar mais um animal? (s/n): ").lower()
-                        if nova_operacao == 's' or nova_operacao == 'n':
-                            break
-                        else:
-                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                    
-                    if nova_operacao == 'n':
-                        break
-
+                
             case "3":
-                while True:
                     animais = carregar_animal()
+                    print ("\n ------> ATUALIZAÇÃO DE DADOS DOS ANIMAIS <------")
                     nome_antigo = input("Informe o nome do animal a ser atualizado (o nome antigo): ")
                     animal_encontrado = any(animal['nome'].strip().lower() == nome_antigo for animal in animais)
                     if not animal_encontrado:
                         print("Não há informações desse animal no nosso sistema!")
                     else: 
                         novo_nome = input("Informe o novo nome: ")
-                        nova_especie = input("Informe a nova espécie do animal: ")
+                        nova_especie = input("Informe o número correspondente â nova espécie do animal (1 - Cachorro -- 2 - Gato -- 3 Outro): ")
                         nova_idade = input("Informe a nova idade do animal: ")
-                        
+                        nova_raca = input ("Informe a raça do animal: ")
                         while True:
                             novo_sexo = input("Informe o sexo do animal: \n1 - Macho \n2 - Fêmea : ")
                             if novo_sexo == "1":
@@ -443,39 +377,19 @@ def main_animal():
                             else:
                                 print("Opção inválida! Escolha um número de 1 a 7.")
                         
-                        historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...):: ")
+                        historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
                         novo_abrigo = input("Informe o novo nome do abrigo em que o animal está instalado: ")
                         adotado = input("O animal já foi adotado? (s/n): ").lower()
                         novo_dono = input("Informe o nome completo do dono do animal: ") if adotado == 's' else None
                         
-                        atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo)
+                        atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo, nova_raca)
                     
-                    while True:
-                        nova_operacao = input("\nDeseja atualizar mais um animal? (s/n): ").lower()
-                        if nova_operacao == 's' or nova_operacao == 'n':
-                            break
-                        else:
-                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                    
-                    if nova_operacao == 'n':
-                        break
-
-            case "4":
-                while True:
+            case "4":           
+                    print ("\n ------> EXCLUSÃO DE DADOS DOS ANIMAIS <------")
                     nome = input("Qual o nome do animal que você deseja excluir? ")
                     excluir_animal(nome)
-                    
-                    while True:
-                        nova_operacao = input("\nDeseja excluir mais um animal? (s/n): ").lower()
-                        if nova_operacao == 's' or nova_operacao == 'n':
-                            break
-                        else:
-                            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")
-                    
-                    if nova_operacao == 'n':
-                        break
-
             case "5":
+                print("->>> LISTA DE DADOS DE VOLUNTÁRIOS - EM BUSCA DE UM LAR <<<-")
                 listar_animal()
 
             case "6":
@@ -493,6 +407,6 @@ def main_animal():
 
 
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     main_animal()
     main_voluntario ()

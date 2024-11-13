@@ -155,7 +155,7 @@ def main1 ():
         elif op==5:
             main3 ()
         elif op == 6:
-            print ("Obrigada por utilizar nossos serviços! :)")
+            print (" Obrigada por utilizar nossos serviços! :)")
             print("Saindo da plataforma...")
             sleep(2) 
             break

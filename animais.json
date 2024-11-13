@@ -5,7 +5,7 @@
         "idade": "2",
         "porte": "1",
         "raca": "Shitzu",
-        "historico_medico": "nao,nao,sim",
+        "historico_medico": "está com a doença do carrapato e sendo tratado no momento",
         "abrigo": "Aloha",
         "caracteristica_animal": "5",
         "sexo": "macho"
@@ -14,9 +14,9 @@
         "nome": "LULU",
         "especie": "2",
         "idade": "3",
-        "porte": "2",
+        "porte": "1",
         "raca": "Laranja",
-        "historico_medico": "sim,nao,nao",
+        "historico_medico": "tem taquicardia as vezes, já esta velhinha",
         "abrigo": "Pets",
         "caracteristica_animal": "4",
         "sexo": "fêmea"
@@ -25,11 +25,78 @@
         "nome": "Dory",
         "especie": "3",
         "idade": "1",
-        "porte": "3",
-        "raca": "Tubarão Branco",
-        "historico_medico": "nao,nao,nao",
+        "porte": "1",
+        "raca": "peixe",
+        "historico_medico": "está bem de saúde aparentemente",
         "abrigo": "Aloha",
         "caracteristica_animal": "1",
+        "sexo": "fêmea"
+    },
+    {
+        "nome": "Galinha",
+        "especie": "1",
+        "idade": "5",
+        "porte": "2",
+        "raca": "siamês",
+        "historico_medico": "está vacinado e bem de saúde",
+        "abrigo": "aloha",
+        "caracteristica_animal": "2",
+        "sexo": "macho"
+    },
+    {
+        "nome": "kaju",
+        "especie": "2",
+        "idade": "2",
+        "porte": "2",
+        "raca": "Vaca",
+        "historico_medico": "castrada e vacinada",
+        "abrigo": "amigos queridos",
+        "caracteristica_animal": "2",
+        "sexo": "fêmea",
+        "dono": null
+    },
+    {
+        "nome": "jaca",
+        "especie": "2",
+        "idade": "4",
+        "porte": "3",
+        "raca": "maine coon",
+        "historico_medico": "bem de saúde",
+        "abrigo": "lua da felicidade",
+        "caracteristica_animal": "6",
+        "sexo": "macho"
+    },
+    {
+        "nome": "mel",
+        "especie": "3",
+        "idade": "9",
+        "porte": "2",
+        "raca": "pássaro",
+        "historico_medico": "problema de visão",
+        "abrigo": "amigos queridos",
+        "caracteristica_animal": "3",
+        "sexo": "fêmea"
+    },
+    {
+        "nome": "feijão",
+        "especie": "1",
+        "idade": "3",
+        "porte": "3",
+        "raca": "pastor alemão",
+        "historico_medico": "Não sente bem o cheiro, mas é saudável",
+        "abrigo": "pet lua",
+        "caracteristica_animal": "5",
+        "sexo": "fêmea"
+    },
+    {
+        "nome": "Adão",
+        "especie": "3",
+        "idade": "12",
+        "porte": "2",
+        "raca": "bicho preguiça",
+        "historico_medico": "vacinado",
+        "abrigo": "amigos queridos",
+        "caracteristica_animal": "5",
         "sexo": "fêmea"
     }
 ]
