@@ -224,7 +224,7 @@ def main_voluntario():
                                     voluntarios=carregar_voluntario ()
                                     cpf_encontrado = any (voluntario['cpf']==cpf for voluntario in voluntarios)
                                     if not cpf_encontrado:
-                                            print (" Não há informações desse abrigo no nosso sistema!")
+                                            print (" Não há informações desse voluntário no nosso sistema!")
                                     else: 
                                         novo_nome = input("Informe o novo nome completo: ")
                                         novo_ende = input("Informe o novo bairro do voluntário: ")
@@ -263,27 +263,6 @@ def main_voluntario():
                                 exit()
                             case _:
                                 print("Opção inválida! Tente novamente.")
-'''def solicitar_numerico(mensagem):
-    while True:
-        try:
-            valor = input(mensagem)
-            int(valor)  # Valida se é numérico
-            return valor
-        except ValueError:
-            print("Por favor, digite apenas números.")
-
-# Função auxiliar para perguntar se o usuário deseja continuar a operação
-def continuar_operacao(operacao):
-    while True:
-        resposta = input(f"Deseja {operacao} (s/n)? ").strip().lower()
-        if resposta == 's':
-            return True
-        elif resposta == 'n':
-            print("Voltando para o menu secundário...")
-            sleep(2)
-            return False
-        else:
-            print("Opção inválida! Por favor, digite 's' para sim ou 'n' para não.")'''
 
 def main_animal():                 
     while True:
@@ -378,7 +357,13 @@ def main_animal():
                         
                         historico_medico = input("Informe o novo histórico médico do animal (Ex: Se foi vacinado, castrado, vermifugado...): ")
                         novo_abrigo = input("Informe o novo nome do abrigo em que o animal está instalado: ")
-                        adotado = input("O animal já foi adotado? (s/n): ").lower()
+                        while True:
+                            adotado = input("O animal já foi adotado? (s/n): ").lower()
+                            if adotado == 's' or adotado == 'n':
+                                break
+                            else:
+                                print("Opção inválida. Por favor, responda com 's' para sim ou 'n' para não.")
+
                         novo_dono = input("Informe o nome completo do dono do animal: ") if adotado == 's' else None
                         
                         atualizar_animal(nome_antigo, novo_nome, nova_especie, nova_idade, novo_dono, historico_medico, novo_abrigo, nova_caracteristica_animal, novo_sexo, nova_raca)
