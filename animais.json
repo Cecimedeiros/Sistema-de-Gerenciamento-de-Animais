@@ -1,4 +1,15 @@
 [
+    {
+        "nome": "Thor",
+        "especie": "1",
+        "idade": "2",
+        "porte": "1",
+        "raca": "Shitzu",
+        "historico_medico": "está com a doença do carrapato e sendo tratado no momento",
+        "abrigo": "Aloha",
+        "caracteristica_animal": "5",
+        "sexo": "macho"
+    },
    {
       "nome": "LULU",
       "especie": "2",

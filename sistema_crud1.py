@@ -45,16 +45,15 @@ def atualizar_abrigo (nome_antigo, novo_nome, novo_ende, novo_porte_animal, novo
         json.dump(abrigos, arquivojson_aberto,indent=3, ensure_ascii=False)
     if abrigo_encontrado:
         print (" Informações sobre o abrigo atualizadas!")
-    else:
-        print(" Abrigo não encontrado!")
+
 
 def excluir_abrigo (nome):
     abrigos=carregar_abrigo()
-    nome=nome.lower ()
+    nome=nome.strip().lower ()
     abrigo_encontrado= False
     
     for abrigo in abrigos:
-        if abrigo['nome'].lower ()==nome:
+        if abrigo['nome'].strip().lower()==nome:
             abrigos.remove (abrigo) 
             abrigo_encontrado= True
             print (" Dados do abrigo excluídos! ") 
@@ -66,10 +65,10 @@ def excluir_abrigo (nome):
 
 def buscar_abrigos(nome):
     abrigos=carregar_abrigo ()
-    nome = nome.lower ()
+    nome = nome.strip().lower ()
     abrigo_encontrado= False
     for abrigo in abrigos:
-        if abrigo['nome'].lower () == nome:
+        if abrigo['nome'].strip().lower () == nome:
             print (f" Nome: {abrigo['nome']},\n Endereço: {abrigo['endereco']},\n Porte do animal: {abrigo['porte_animal']},\n Contato: {abrigo['contato']} ")    
             abrigo_encontrado= True
     if not abrigo_encontrado:

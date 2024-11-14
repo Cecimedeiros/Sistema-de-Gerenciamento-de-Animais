@@ -388,9 +388,6 @@ def main_animal():
             case _:
                 print("Opção inválida! Tente novamente!")
 
-
-
-
 if __name__ == "_main_":
     main_animal()
     main_voluntario ()

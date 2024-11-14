@@ -10,7 +10,7 @@
    {
       "nome": "Sandra",
       "idade": 44,
-      "bairro": "VÃ¡rzea",
+      "bairro": "Várzea",
       "contato": "88888888",
       "preferencia_porte": "1",
       "preferencia_especie": "2"
@@ -18,7 +18,7 @@
    {
       "nome": "Luis",
       "idade": 24,
-      "bairro": "VÃ¡rzea",
+      "bairro": "Várzea",
       "contato": "77777",
       "preferencia_porte": "1",
       "preferencia_especie": "3"
@@ -26,7 +26,7 @@
    {
       "nome": "Gabriel",
       "idade": 22,
-      "bairro": "VÃ¡rzea",
+      "bairro": "Várzea",
       "contato": "8198446",
       "preferencia_porte": "2",
       "preferencia_especie": "1"
@@ -42,13 +42,13 @@
    {
       "nome": "Julia Barbosa Almeida",
       "idade": 76,
-      "bairro": "GraÃ§as",
+      "bairro": "Graças",
       "contato": "81975275267",
       "preferencia_especie": "2",
       "preferencia_porte": "3"
    },
    {
-      "nome": "PatrÃ­cia Ferreira Gomes",
+      "nome": "Patrí­cia Ferreira Gomes",
       "idade": 29,
       "bairro": "Casa Forte",
       "contato": "81988872223",
@@ -66,7 +66,7 @@
    {
       "nome": "Raquelino Gomes Mesquita",
       "idade": 39,
-      "bairro": "VÃ¡rzea",
+      "bairro": "Várzea",
       "contato": "8177762234",
       "preferencia_especie": "3",
       "preferencia_porte": "3"
@@ -78,5 +78,13 @@
       "contato": "222",
       "preferencia_especie": "2",
       "preferencia_porte": "2"
+   },
+   {
+      "nome": "Ceci",
+      "idade": 82,
+      "bairro": "Várzea",
+      "contato": "99999911102",
+      "preferencia_especie": "2",
+      "preferencia_porte": "1"
    }
 ]
