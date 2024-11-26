@@ -2,7 +2,7 @@ import json
 import os
 from time import sleep
 
-caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'json2.json')
+caminho_arquivocrud2 = os.path.join(os.path.dirname(__file__), 'voluntarios.json')
 
 def carregar_voluntario():
     if not os.path.exists(caminho_arquivocrud2):

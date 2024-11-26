@@ -1,10 +1,10 @@
 import json
 import os
 from time import sleep
-from sec_crud import main_animal, main_voluntario, voluntario_cadastrar
-from third_crud import main3
+from crud_voluntarios_animais import main_animal, main_voluntario, voluntario_cadastrar
+from crud_adotantes_match import main3
 
-caminho_arquivo= os.path.join(os.path.dirname(__file__), 'json_abrigo.json')
+caminho_arquivo= os.path.join(os.path.dirname(__file__), 'abrigos.json')
 
 def carregar_abrigo():
     if not os.path.exists(caminho_arquivo):

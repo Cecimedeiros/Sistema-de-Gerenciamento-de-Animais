@@ -1,7 +1,7 @@
 import json
 import os
 from time import sleep
-from sec_crud import *
+from crud_voluntarios_animais import *
 
 caminho_arquivo = os.path.join(os.path.dirname(__file__), 'adotantes.json')
 
@@ -141,7 +141,7 @@ def verificar_preferencia_adotante(adotantes, animais):
         if preferencia_porte == porte_animal and preferencia_especie == especie_animal:
             print(f"\nEncontrado animal que atende às preferências de {adotante_encontrado['nome']}:")
             print(f"Nome: {animal['nome']}, Espécie: {obter_preferencia_especie(especie_animal)}, Porte: {obter_preferencia_porte(porte_animal)}")
-            print("Este animal pode ser uma boa opção para adoção! ;) \n Ademais, caso queira saber mais sobre o animal, vá até o menu secundário e escolha \"Listar animais disponíveis para adoção")
+            print("Este animal pode ser uma boa opção para adoção! ;) \nAdemais, caso queira saber mais sobre o animal, vá até o menu secundário e escolha a opção \"Listar animais disponíveis para adoção\"")
             return animal  
 
     print("Nenhum animal encontrado que atenda às preferências. Se quiser saber mais sobre outros animais, vá até o menu secundário e escolha \"Listar animais disponíveis para adoção\"")
